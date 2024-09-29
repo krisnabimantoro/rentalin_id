@@ -4,9 +4,10 @@ import 'package:rentalin_id/app/data/constant/color.dart';
 class ButtonGoogle extends StatelessWidget {
   final String iconPath;
   final String labelText;
+  final VoidCallback onPressed;
 
   const ButtonGoogle(
-      {super.key, required this.iconPath, required this.labelText});
+      {super.key, required this.iconPath, required this.labelText,required this.onPressed,});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +15,7 @@ class ButtonGoogle extends StatelessWidget {
         width: 380,
         height: 52,
         child: ElevatedButton.icon(
-          onPressed: () {},
-          // icon: Icon(Image.asset("assets/icon/google.svg") as IconData?),
+          onPressed: onPressed,
           icon: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(iconPath),

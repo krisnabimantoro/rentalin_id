@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/home/views/home_view.dart';
+import 'package:rentalin_id/app/modules/signup/views/signup_user_view.dart';
 import 'package:rentalin_id/app/modules/widgets/google_button.dart';
 
 import '../controllers/signup_controller.dart';
@@ -16,7 +17,9 @@ class SignupView extends GetView<SignupController> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Padding(
                 padding: const EdgeInsets.only(left: 6),
                 child: Image.asset("assets/icon/arrow-left.png"),
@@ -24,14 +27,14 @@ class SignupView extends GetView<SignupController> {
         ),
         body: Container(
           padding: const EdgeInsets.only(left: 23, right: 23),
-          child: const Column(
+          child: Column(
             children: [
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /*2*/
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(bottom: 0),
                     child: Text(
                       "Create Your Account",
@@ -42,24 +45,28 @@ class SignupView extends GetView<SignupController> {
                     ),
                   ),
                   /*3*/
-                  Text(
+                  const Text(
                     "Welcome to rentalin.id",
                     style: TextStyle(color: tdGrey, fontSize: 16),
                   ),
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(top: 190),
                       child: InputText(
                           labelText: "Name Rent",
                           hintText: "Enter tour name rent",
                           iconPath: "assets/icon/building.png")),
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(top: 170), child: ButtonNext()),
                   Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: ButtonGoogle(
-                          iconPath: "assets/icon/google.png",
-                          labelText: "Sign in with Google")),
-                  Padding(
+                        iconPath: "assets/icon/google.png",
+                        labelText: "Sign in with Google",
+                        onPressed: () {
+                          print("Button pressed!");
+                        },
+                      )),
+                  const Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +103,7 @@ class ButtonNext extends StatelessWidget {
         height: 52,
         child: ElevatedButton(
           onPressed: () {
-            Get.to(const HomeView());
+            Get.to(const SignupUserView());
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: tdBlue,
