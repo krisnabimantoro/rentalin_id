@@ -38,7 +38,7 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^2.1.0 
   image_picker: ^0.8.3
-
+  permission_handler: ^11.3.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +68,8 @@ flutter:
     - assets/icon/phone.png
     - assets/icon/user.png
     - assets/icon/image-plus.png
+    - assets/icon/lock.png
+    
 
   # To add assets to your application, add an assets section, like this:
   # assets:

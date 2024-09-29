@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/signup/views/signup_password_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
 import 'package:rentalin_id/app/modules/widgets/google_button.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,12 +51,13 @@ class SignupUserView extends GetView<SignupController> {
                   color: tdBlue,
                 ),
               ),
-            ), const Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-            child: Text(  
-              "Welcome to rentalin.id",
-              style: TextStyle(color: tdGrey, fontSize: 16),
             ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Text(
+                "Welcome to rentalin.id",
+                style: TextStyle(color: tdGrey, fontSize: 16),
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +186,9 @@ class ButtonNext extends StatelessWidget {
       width: 380,
       height: 52,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(const SignupPasswordView());
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: tdBlue,
           foregroundColor: tdWhite,

@@ -21,7 +21,7 @@ class ButtonGoogle extends StatelessWidget {
             child: Image.asset(iconPath),
           ),
           style: ElevatedButton.styleFrom(
-              backgroundColor: null,
+              backgroundColor: tdWhite,
               foregroundColor: tdGrey,
               shape: RoundedRectangleBorder(
                 side: const BorderSide(color: tdGrey),
