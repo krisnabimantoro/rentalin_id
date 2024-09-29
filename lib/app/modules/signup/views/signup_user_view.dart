@@ -1,108 +1,152 @@
 import 'package:flutter/material.dart';
-
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
 import 'package:rentalin_id/app/modules/widgets/google_button.dart';
-
+import 'package:image_picker/image_picker.dart';
 import '../controllers/signup_controller.dart';
 import '../../widgets/input_text.dart';
-// import 'package:rentalin_id/app/modules/signup/controllers/signup_controller.dart';
 
 class SignupUserView extends GetView<SignupController> {
   const SignupUserView({super.key});
+
+  Widget displayImage(XFile? pickedFile) {
+    if (pickedFile != null) {
+      return Image.file(File(pickedFile.path));
+    } else {
+      return const Text('No image selected');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.to(SignupView());
-              },
-              icon: Padding(
-                padding: const EdgeInsets.only(left: 6),
-                child: Image.asset("assets/icon/arrow-left.png"),
-              )),
-        ),
-        body: Container(
-          padding: const EdgeInsets.only(left: 23, right: 23),
-          child: Column(
-            children: [
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  /*2*/
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 0),
-                    child: Text(
-                      "Create Your Account",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          color: tdBlue),
-                    ),
-                  ),
-                  /*3*/
-                  const Text(
-                    "Welcome to rentalin.id",
-                    style: TextStyle(color: tdGrey, fontSize: 16),
-                  ),
-
-                  
-                  const Padding(
-                      padding: EdgeInsets.only(top: 40),
-                      child: InputText(
-                          labelText: "Full Name",
-                          hintText: "Enter tour Full Name",
-                          iconPath: "assets/icon/user.png")),
-                  const Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: InputText(
-                          labelText: "Email Address",
-                          hintText: "Enter tour email address",
-                          iconPath: "assets/icon/mail.png")),
-                  const Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: InputText(
-                          labelText: "Phone Number",
-                          hintText: "Enter tour phone number",
-                          iconPath: "assets/icon/phone.png")),
-                  const Padding(
-                      padding: EdgeInsets.only(top: 30), child: ButtonNext()),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: ButtonGoogle(
-                        iconPath: "assets/icon/google.png",
-                        labelText: "Sign in with Google",
-                        onPressed: () {
-                          print("button pressed");
-                        },
-                      )),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 5),
-                          child: Text(
-                            "Have an Account?",
-                            style: TextStyle(color: tdGrey),
-                          ),
-                        ),
-                        Text(
-                          "Sign In",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              )),
-            ],
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.to(SignupView());
+          },
+          icon: Padding(
+            padding: const EdgeInsets.only(left: 6),
+            child: Image.asset("assets/icon/arrow-left.png"),
           ),
-        ));
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(left: 23, right: 23),
+        child: Column(
+          // Set mainAxisSize to min to allow scrolling properly
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(bottom: 0),
+              child: Text(
+                "Create Your Account",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: tdBlue,
+                ),
+              ),
+            ),
+            const Text(
+              "Welcome to rentalin.id",
+              style: TextStyle(color: tdGrey, fontSize: 16),
+            ),
+            Obx(() {
+              return displayImage(controller.selectedImagePath.value.isNotEmpty
+                  ? XFile(controller.selectedImagePath.value)
+                  : null);
+            }),
+            SizedBox(
+              width: 380,
+              height: 52,
+              child: ElevatedButton(
+                onPressed: () async {
+                  final pickedFile =
+                      await controller.pickImage(); // Call the pickImage method
+                  if (pickedFile != null) {
+                    controller.selectedImagePath.value =
+                        pickedFile.path; // Update the path in controller
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: tdBlue,
+                  foregroundColor: tdWhite,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  "Upload Image",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+           
+            const Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: InputText(
+                labelText: "Full Name",
+                hintText: "Enter your Full Name",
+                iconPath: "assets/icon/user.png",
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: InputText(
+                labelText: "Email Address",
+                hintText: "Enter your email address",
+                iconPath: "assets/icon/mail.png",
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: InputText(
+                labelText: "Phone Number",
+                hintText: "Enter your phone number",
+                iconPath: "assets/icon/phone.png",
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: ButtonNext(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: ButtonGoogle(
+                iconPath: "assets/icon/google.png",
+                labelText: "Sign in with Google",
+                onPressed: () {
+                  print("button pressed");
+                },
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 15, bottom: 50),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 5),
+                    child: Text(
+                      "Have an Account?",
+                      style: TextStyle(color: tdGrey),
+                    ),
+                  ),
+                  Text(
+                    "Sign In",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -112,19 +156,22 @@ class ButtonNext extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 380,
-        height: 52,
-        child: ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-              backgroundColor: tdBlue,
-              foregroundColor: tdWhite,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10))),
-          child: const Text(
-            "Next",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      width: 380,
+      height: 52,
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: tdBlue,
+          foregroundColor: tdWhite,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-        ));
+        ),
+        child: const Text(
+          "Next",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+      ),
+    );
   }
 }

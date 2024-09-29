@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
-import 'package:rentalin_id/app/modules/home/views/home_view.dart';
+// import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_user_view.dart';
 import 'package:rentalin_id/app/modules/widgets/google_button.dart';
 
@@ -25,13 +25,13 @@ class SignupView extends GetView<SignupController> {
                 child: Image.asset("assets/icon/arrow-left.png"),
               )),
         ),
-        body: Container(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.only(left: 23, right: 23),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /*2*/
                   const Padding(
@@ -86,7 +86,7 @@ class SignupView extends GetView<SignupController> {
                     ),
                   )
                 ],
-              )),
+              ),
             ],
           ),
         ));
