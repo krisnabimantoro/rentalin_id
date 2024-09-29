@@ -50,44 +50,69 @@ class SignupUserView extends GetView<SignupController> {
                   color: tdBlue,
                 ),
               ),
-            ),
-            const Text(
+            ), const Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+            child: Text(  
               "Welcome to rentalin.id",
               style: TextStyle(color: tdGrey, fontSize: 16),
             ),
-            Obx(() {
-              return displayImage(controller.selectedImagePath.value.isNotEmpty
-                  ? XFile(controller.selectedImagePath.value)
-                  : null);
-            }),
-            SizedBox(
-              width: 380,
-              height: 52,
-              child: ElevatedButton(
-                onPressed: () async {
-                  final pickedFile =
-                      await controller.pickImage(); // Call the pickImage method
-                  if (pickedFile != null) {
-                    controller.selectedImagePath.value =
-                        pickedFile.path; // Update the path in controller
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: tdBlue,
-                  foregroundColor: tdWhite,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Profile Picture",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: tdBlue,
                   ),
                 ),
-                child: const Text(
-                  "Upload Image",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                SizedBox(
+                  width: 380,
+                  height: 100,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final pickedFile = await controller
+                          .pickImage(); // Call the pickImage method
+                      if (pickedFile != null) {
+                        controller.selectedImagePath.value =
+                            pickedFile.path; // Update the path in controller
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: tdWhite,
+                      foregroundColor: tdWhite,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: tdBlue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Obx(() {
+                      return controller.selectedImagePath.value.isNotEmpty
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(
+                                File(controller.selectedImagePath.value),
+
+                                fit: BoxFit.cover, // Adjust the fit as needed
+                              ),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                "assets/icon/image-plus.png",
+                                width: 100,
+                                height: 100,
+                              ),
+                            );
+                    }),
+                  ),
                 ),
-              ),
+              ],
             ),
-           
             const Padding(
-              padding: EdgeInsets.only(top: 40),
+              padding: EdgeInsets.only(top: 10),
               child: InputText(
                 labelText: "Full Name",
                 hintText: "Enter your Full Name",

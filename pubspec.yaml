@@ -67,6 +67,7 @@ flutter:
     - assets/icon/mail.png
     - assets/icon/phone.png
     - assets/icon/user.png
+    - assets/icon/image-plus.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
