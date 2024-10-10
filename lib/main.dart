@@ -9,6 +9,7 @@ import 'app/routes/app_pages.dart';
 void main() {
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: new ThemeData(scaffoldBackgroundColor: tdBg),
       title: "Application",
       initialRoute: AppPages.INITIAL,

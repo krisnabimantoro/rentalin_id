@@ -24,6 +24,7 @@ class SignupUserView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: tdBg,
         leading: IconButton(
           onPressed: () {
             Get.to(SignupView());

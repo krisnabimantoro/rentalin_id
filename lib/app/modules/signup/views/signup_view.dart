@@ -16,6 +16,7 @@ class SignupView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: tdBg,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -55,6 +56,7 @@ class SignupView extends GetView<SignupController> {
                           labelText: "Name Rent",
                           hintText: "Enter tour name rent",
                           iconPath: "assets/icon/building.png")),
+
                   const Padding(
                       padding: EdgeInsets.only(top: 170), child: ButtonNext()),
                   Padding(
@@ -81,11 +83,11 @@ class SignupView extends GetView<SignupController> {
                         Text(
                           "Sign In",
                           style: TextStyle(fontWeight: FontWeight.bold),
-                        )
+                        ),
                       ],
                     ),
                   )
-                ],
+                ],//children
               ),
             ],
           ),

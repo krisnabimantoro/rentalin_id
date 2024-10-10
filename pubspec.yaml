@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^2.1.0 
   image_picker: ^0.8.3
   permission_handler: ^11.3.1
+  flutter_floating_bottom_bar: ^1.2.1+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -61,14 +62,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/icon/google.png
-    - assets/icon/building.png
-    - assets/icon/arrow-left.png
-    - assets/icon/mail.png
-    - assets/icon/phone.png
-    - assets/icon/user.png
-    - assets/icon/image-plus.png
-    - assets/icon/lock.png
+    - assets/icon/
+    - assets/icon/bottombar/
     
 
   # To add assets to your application, add an assets section, like this:

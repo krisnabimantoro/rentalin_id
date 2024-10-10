@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
-import 'package:rentalin_id/app/modules/search/controllers/search_controller.dart';
+import 'package:rentalin_id/app/modules/home/views/home_view.dart';
+// import 'package:rentalin_id/app/modules/search/controllers/search_controller.dart';
 import 'package:rentalin_id/app/modules/search/views/search_view.dart';
 // import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_user_view.dart';
@@ -18,6 +19,7 @@ class SignupPasswordView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: tdBg,
           leading: IconButton(
               onPressed: () {
                 Get.to(const SignupUserView());
@@ -111,7 +113,7 @@ class ButtonNext extends StatelessWidget {
         height: 52,
         child: ElevatedButton(
           onPressed: () {
-            Get.to(const SearchView());
+            Get.to(const HomeView());
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: tdBlue,

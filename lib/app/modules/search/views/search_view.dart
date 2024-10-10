@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/search_controller.dart';
-
+import '../../../data/constant/color.dart';
 
 class SearchView extends GetView<SearchingController> {
   const SearchView({super.key});
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
-      backgroundColor: Color(0xffF2F3F6),
+  return Scaffold(backgroundColor: tdBg,
       body: ListView(
         children: [
           SizedBox(
