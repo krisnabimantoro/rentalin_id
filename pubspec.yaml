@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/icon/
     - assets/icon/bottombar/
+    - assets/img/
     
 
   # To add assets to your application, add an assets section, like this:
