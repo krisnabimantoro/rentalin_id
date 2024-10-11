@@ -18,7 +18,7 @@ class NotificationView extends GetView<NotificationController> {
             // leadingWidth: 344,
             elevation: 0,
             backgroundColor: tdBg,
-            toolbarHeight: 100,
+            toolbarHeight: 80,
             titleSpacing: 0,
             automaticallyImplyLeading: false,
             title: const AppBarComponents(nameMenu: 'Notifications',)),

@@ -28,7 +28,7 @@ class InputText extends StatelessWidget {
         ),
         TextField(
           cursorColor: tdSecBlue,
-          style: const TextStyle(color: tdBlue, fontSize: 15),
+          style: const TextStyle(color: tdBlue, fontSize: 16),
           decoration: InputDecoration(
             prefixIcon: Padding(
               padding: const EdgeInsets.all(8.0),

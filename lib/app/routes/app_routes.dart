@@ -9,6 +9,7 @@ abstract class Routes {
   static const SEARCH = _Paths.SEARCH;
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const REVIEW = _Paths.REVIEW;
+  static const MANAGE_MOTORCYCLE = _Paths.MANAGE_MOTORCYCLE;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const SEARCH = '/search';
   static const NOTIFICATION = '/notification';
   static const REVIEW = '/review';
+  static const MANAGE_MOTORCYCLE = '/manage-motorcycle';
 }
