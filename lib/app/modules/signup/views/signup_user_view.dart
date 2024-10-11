@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_password_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
-import 'package:rentalin_id/app/modules/widgets/google_button.dart';
+import 'package:rentalin_id/app/widgets/google_button.components.dart';
 import 'package:image_picker/image_picker.dart';
 import '../controllers/signup_controller.dart';
-import '../../widgets/input_text.dart';
+import '../../../widgets/input_text.components.dart';
 
 class SignupUserView extends GetView<SignupController> {
   const SignupUserView({super.key});

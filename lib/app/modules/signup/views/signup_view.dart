@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 // import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_user_view.dart';
-import 'package:rentalin_id/app/modules/widgets/google_button.dart';
+import 'package:rentalin_id/app/widgets/google_button.components.dart';
 
 import '../controllers/signup_controller.dart';
-import '../../widgets/input_text.dart';
+import '../../../widgets/input_text.components.dart';
 // import 'package:rentalin_id/app/modules/signup/controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
@@ -32,7 +32,7 @@ class SignupView extends GetView<SignupController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /*2*/
                   const Padding(
@@ -56,7 +56,6 @@ class SignupView extends GetView<SignupController> {
                           labelText: "Name Rent",
                           hintText: "Enter tour name rent",
                           iconPath: "assets/icon/building.png")),
-
                   const Padding(
                       padding: EdgeInsets.only(top: 170), child: ButtonNext()),
                   Padding(
@@ -87,7 +86,7 @@ class SignupView extends GetView<SignupController> {
                       ],
                     ),
                   )
-                ],//children
+                ], //children
               ),
             ],
           ),

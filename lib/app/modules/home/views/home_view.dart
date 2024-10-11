@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/modules/login/views/login_view.dart';
-import 'package:rentalin_id/app/modules/widgets/bottom_bar.dart';
+import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
 
 import '../controllers/home_controller.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
