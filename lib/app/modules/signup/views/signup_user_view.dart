@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/signup/controllers/signup_controller.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_password_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentalin_id/app/widgets/google_button.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
-import '../controllers/signup_controller.dart';
+// import '../controllers/signup_controller.dart';
 import '../bindings/signup_binding.dart';
 
 class SignupUserView extends GetView<SignupController> {
@@ -73,46 +74,27 @@ class SignupUserView extends GetView<SignupController> {
                   ),
                 ),
                 SizedBox(
-                  width: 380,
-                  height: 100,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      final pickedFile = await controller
-                          .pickImage(); // Call the pickImage method
-                      if (pickedFile != null) {
-                        controller.selectedImagePath.value =
-                            pickedFile.path; // Update the path in controller
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: tdWhite,
-                      foregroundColor: tdWhite,
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(color: tdBlue),
-                        borderRadius: BorderRadius.circular(10),
+                    width: 380,
+                    height: 100,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: tdWhite,
+                        foregroundColor: tdWhite,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: tdBlue),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Obx(() {
-                      return controller.selectedImagePath.value.isNotEmpty
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.file(
-                                File(controller.selectedImagePath.value),
-
-                                fit: BoxFit.cover, // Adjust the fit as needed
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(
-                                "assets/icon/image-plus.png",
-                                width: 100,
-                                height: 100,
-                              ),
-                            );
-                    }),
-                  ),
-                ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          "assets/icon/image-plus.png",
+                          width: 100,
+                          height: 100,
+                        ),
+                      ),
+                    ))
               ],
             ),
             const Padding(
