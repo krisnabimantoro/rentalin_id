@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
-import 'package:rentalin_id/app/modules/Rent/views/rent_view.dart';
-import 'package:rentalin_id/app/modules/Rent/views/rent4_view.dart';
+import 'package:rentalin_id/app/modules/rent/views/rent_view.dart';
+import 'package:rentalin_id/app/modules/rent/views/rent4_view.dart';
 
 import '../../../widgets/app_bar.components.dart';
 import '../../rent/views/rentDetail_view.dart';

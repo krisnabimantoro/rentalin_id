@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:rentalin_id/app/modules/Rent/controllers/rent_controller.dart';
+import 'package:rentalin_id/app/modules/rent/controllers/rent_controller.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 import '../../../data/constant/color.dart';

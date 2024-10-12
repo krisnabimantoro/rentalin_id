@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
-import 'package:rentalin_id/app/modules/Rent/views/rent2_view.dart';
+import 'package:rentalin_id/app/modules/rent/views/rent2_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_password_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
