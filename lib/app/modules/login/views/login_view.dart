@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
+import 'package:rentalin_id/app/routes/app_pages.dart';
 import 'package:rentalin_id/app/widgets/button_main.components.dart';
 import 'package:rentalin_id/app/widgets/google_button.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
@@ -86,7 +88,7 @@ class LoginView extends GetView<LoginController> {
                   child: ButtonMainComponents(
                       buttonName: "Login",
                       nextPage: () {
-                        print("Button pressed!");
+                       Get.offAndToNamed(Routes.HOME);
                       }))
             ]),
             Padding(
