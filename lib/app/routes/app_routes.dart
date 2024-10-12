@@ -13,6 +13,8 @@ abstract class Routes {
   static const HISTORY = _Paths.HISTORY;
   static const HISTORY_PAGE = _Paths.HISTORY_PAGE;
   static const CALENDAR = _Paths.CALENDAR;
+  static const PROFILE = _Paths.PROFILE;
+  static const RENT = _Paths.RENT;
 }
 
 abstract class _Paths {
@@ -27,4 +29,6 @@ abstract class _Paths {
   static const HISTORY = '/history';
   static const HISTORY_PAGE = '/history-page';
   static const CALENDAR = '/calendar';
+  static const PROFILE = '/profile';
+  static const RENT = '/rent';
 }

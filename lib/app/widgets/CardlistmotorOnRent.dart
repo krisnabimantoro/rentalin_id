@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
-
-class CardListMotor extends StatelessWidget {
-  const CardListMotor({
+class CardListOnRent   extends StatelessWidget {
+  const CardListOnRent  ({
     super.key,
   });
 
@@ -38,7 +37,8 @@ class CardListMotor extends StatelessWidget {
                     image: DecorationImage(
                         image: AssetImage("assets/img/img1.jpg"),
                         fit: BoxFit.cover),
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(8))),
               ),
               SizedBox(
                 width: 12,
@@ -53,7 +53,8 @@ class CardListMotor extends StatelessWidget {
                   ),
                   Text(
                     "PCX 2024",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "KH 1231 WG",
@@ -67,7 +68,8 @@ class CardListMotor extends StatelessWidget {
                       Text(
                         "Rp 150.000",
                         style: TextStyle(
-                            color: tdBlue, fontWeight: FontWeight.w700),
+                            color: tdBlue,
+                            fontWeight: FontWeight.w700),
                       ),
                       Text(
                         "/Day",
@@ -84,32 +86,21 @@ class CardListMotor extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "Avaiable",
+                    "On Rent By",
                     style: TextStyle(
-                        color: tdgreen,
-                        fontSize: 12,
+                        color: Colors.red,
+                        fontSize: 8,
                         fontWeight: FontWeight.w700),
                   ),
-                  Row(
-                    children: [
-                      Image(
-                        image: AssetImage("assets/icon/star.png"),
-                        width: 14,
-                        height: 14,
-                      ),
-                      Image(
-                        image: AssetImage("assets/icon/star.png"),
-                        width: 14,
-                        height: 14,
-                      ),
-                      Image(
-                        image: AssetImage("assets/icon/star.png"),
-                        width: 14,
-                        height: 14,
-                      ),
-                    ],
+                  Text(
+                    "Krisna Bimantoro",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800),
                   ),
                 ],
               ),

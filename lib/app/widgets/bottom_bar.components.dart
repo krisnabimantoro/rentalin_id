@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rentalin_id/app/modules/calendar/views/calendar_view.dart';
 import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
+import 'package:rentalin_id/app/modules/profile/views/profile_view.dart';
 
 class ChildBottomBar extends StatelessWidget {
   const ChildBottomBar({
@@ -67,7 +68,7 @@ class ChildBottomBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {Get.to(ProfileView());},
               icon: Padding(
                 padding: const EdgeInsets.only(right: 0),
                 child: Image.asset(

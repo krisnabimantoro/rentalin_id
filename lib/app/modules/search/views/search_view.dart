@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:rentalin_id/app/modules/calendar/views/calendar_view.dart';
+import 'package:rentalin_id/app/modules/search/views/searchAvail_view.dart';
+import 'package:rentalin_id/app/modules/search/views/searchBooked_view.dart';
+import 'package:rentalin_id/app/modules/search/views/searchRent_view.dart';
+import 'package:rentalin_id/app/widgets/CardlistmotorOnBooked.dart';
+import 'package:rentalin_id/app/widgets/CardlistmotorOnRent.dart';
+import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
+import 'package:rentalin_id/app/widgets/cardList.component.dart';
 
+import '../../rent/views/rent_view.dart';
 import '../controllers/search_controller.dart';
 import '../../../data/constant/color.dart';
 
@@ -9,7 +18,8 @@ class SearchView extends GetView<SearchingController> {
   const SearchView({super.key});
   @override
   Widget build(BuildContext context) {
-  return Scaffold(backgroundColor: tdBg,
+    return Scaffold(
+      backgroundColor: tdBg,
       body: ListView(
         children: [
           SizedBox(
@@ -18,371 +28,260 @@ class SearchView extends GetView<SearchingController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 50,
-                width: 290,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Color(0xffffffff),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Color(0xff1966FF))
-                ),
-                child: Text("Searching", style: TextStyle(fontSize: 20,), textAlign: TextAlign.left,),
-              ),
-              // TextField(
-              //   decoration: InputDecoration(
-              //     hintText: 'Searching',
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(10)
-              //     ),
-              //   ),
-              // ),
+              ScrBar(),
               SizedBox(
                 width: 20,
               ),
-
-              Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                color: Color(0xff1966FF),
-                borderRadius: BorderRadius.circular(30), 
-                ),
-                child: Icon(
-                  Icons.search,
-                  color: Color(0xffffffff),
-                ),
-              ),
+              Scr(),
             ],
           ),
-
           SizedBox(
             height: 10,
           ),
-          
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 30,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: Color(0xff1966FF),
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                alignment: Alignment.center,
-                child: Text("All", style: TextStyle(fontSize: 12, color: Color(0xffffffff)), textAlign: TextAlign.center,),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                height: 30,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: Color(0xffC7DAFF),
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                alignment: Alignment.center,
-                child: Text("Available", style: TextStyle(fontSize: 12, color: Color(0xff1966FF)), textAlign: TextAlign.center,),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                height: 30,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: Color(0xffC7DAFF),
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                alignment: Alignment.center,
-                child: Text("Booked", style: TextStyle(fontSize: 12, color: Color(0xff1966FF)), textAlign: TextAlign.center,),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                height: 30,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: Color(0xffC7DAFF),
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                alignment: Alignment.center,
-                child: Text("On Rent", style: TextStyle(fontSize: 12, color: Color(0xff1966FF)), textAlign: TextAlign.center,),
-              ),
-            ],
-          ),
-
+          ScrOpAll(),
           SizedBox(
             height: 10,
           ),
-
-          Card(            
-            margin:  EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              children: [
-                ListTile(
-                  tileColor: Color(0xffffffff),
-                  minTileHeight: 100,
-                  minLeadingWidth: 100,
-                  leading: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.fromLTRB(0, 2, 2, 2),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(5)
-                    ),  
-                    child: Text("IMG"),              
-                  ),
-                  title: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("yamaha",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),),
-                          SizedBox(
-                            width: 110,
-                          ),
-                          Text("available", style: TextStyle(
-                            fontSize: 10,
-                            color: Color(0xffFF9500)
-                          ),)
-                        ],
-                      ),
-                      Padding(padding: EdgeInsets.all(0)),
-                      Row(
-                        children: [
-                          Text("PCX 2024", 
-                          style: TextStyle(
-                            fontSize: 15),),
-                          SizedBox(width: 85,),
-                          Text("NAMA ", style: TextStyle(fontSize: 12),)
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Plat Nomor", 
-                          style: TextStyle(
-                            fontSize: 10),),
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("Rp.200.000/Day", 
-                          style: TextStyle(
-                            fontSize: 13),),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // trailing: Icon(
-                  //   Icons.chevron_left,
-                  //   size: 1,
-                    
-                  // ),
-                )
-              ],
-            ),
-          ),
-
-          Card(            
-            margin:  EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              children: [
-                ListTile(
-                  tileColor: Color(0xffffffff),
-                  minTileHeight: 100,
-                  minLeadingWidth: 100,
-                  leading: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.fromLTRB(0, 2, 2, 2),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(5)
-                    ),  
-                    child: Text("IMG"),              
-                  ),
-                  title: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("yamaha",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),),
-                          SizedBox(
-                            width: 110,
-                          ),
-                          Text("available", style: TextStyle(
-                            fontSize: 10,
-                            color: Color(0xff34C759)
-                          ),)
-                        ],
-                      ),
-                      Padding(padding: EdgeInsets.all(0)),
-                      Row(
-                        children: [
-                          Text("PCX 2024", 
-                          style: TextStyle(
-                            fontSize: 15),),
-                          SizedBox(width: 85,),
-                          Text("NAMA ", style: TextStyle(fontSize: 12),)
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Plat Nomor", 
-                          style: TextStyle(
-                            fontSize: 10),),
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("Rp.200.000/Day", 
-                          style: TextStyle(
-                            fontSize: 13),),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // trailing: Icon(
-                  //   Icons.chevron_left,
-                  //   size: 1,
-                    
-                  // ),
-                )
-              ],
-            ),
-          ),
-
-          Card(            
-            margin:  EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              children: [
-                ListTile(
-                  tileColor: Color(0xffffffff),
-                  minTileHeight: 100,
-                  minLeadingWidth: 100,
-                  leading: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.fromLTRB(0, 2, 2, 2),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(5)
-                    ),  
-                    child: Text("IMG"),              
-                  ),
-                  title: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("yamaha",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),),
-                          SizedBox(
-                            width: 110,
-                          ),
-                          Text("available", style: TextStyle(
-                            fontSize: 10,
-                            color: Color(0xffFF3B30)
-                          ),)
-                        ],
-                      ),
-                      Padding(padding: EdgeInsets.all(0)),
-                      Row(
-                        children: [
-                          Text("PCX 2024", 
-                          style: TextStyle(
-                            fontSize: 15),),
-                          SizedBox(width: 85,),
-                          Text("NAMA ", style: TextStyle(fontSize: 12),)
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Plat Nomor", 
-                          style: TextStyle(
-                            fontSize: 10),),
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("Rp.200.000/Day", 
-                          style: TextStyle(
-                            fontSize: 13),),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // trailing: Icon(
-                  //   Icons.chevron_left,
-                  //   size: 1,
-                    
-                  // ),
-                )
-              ],
-            ),
-          ),
+          CardBooked(),
+          CardAvailable(),
+          CardRent(),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+      // bottomNavigationBar: BottomFloatBar()
+    );
+  }
+}
+
+class Scr extends StatelessWidget {
+  const Scr({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      
+      height: 50,
+      width: 50,
+      decoration: BoxDecoration(
+        color: Color(0xff1966FF),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            shape: CircleBorder(),
+            padding: EdgeInsets.all(0),
+            alignment: Alignment.center,
+            backgroundColor: tdBlue,
+            foregroundColor: tdWhite,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+          child: Icon(
+            Icons.search,
+          )),
+    );
+  }
+}
+
+class ScrBar extends StatelessWidget {
+  const ScrBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: 284,
+      // padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          color: Color(0xffffffff),
+          borderRadius: BorderRadius.circular(20),
+          // border: Border.all(color: Color(0xff1966FF))
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
+      child: const TextField(
+          cursorColor: tdSecBlue,
+          style: TextStyle(color: tdBlue, fontSize: 16),
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: tdSecBlue),
+              borderRadius: BorderRadius.all(Radius.circular(1000)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: tdSecBlue),
+              borderRadius: BorderRadius.all(Radius.circular(1000)),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: tdSecBlue),
+              borderRadius: BorderRadius.all(Radius.circular(1000)),
+            ),
+            fillColor: tdWhite,
+            hoverColor: tdSecBlue,
+            filled: true,
+            alignLabelWithHint: false,
+            hintText: "Searching",
+            hintStyle: TextStyle(color: tdSecBlue),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Bookings',
+        ),
+    );
+  }
+}
+
+class ScrOpAll extends StatelessWidget {
+  const ScrOpAll({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 70,
+          height: 30,
+          child: ElevatedButton(
+            onPressed: () {
+              Get.to(const SearchView());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: tdBlue,
+              foregroundColor: tdWhite,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              "All",
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        SizedBox(
+          width: 98,
+          height: 30,
+          child: ElevatedButton(
+            onPressed: () {
+              Get.to(const SearchAvailView());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xffC7DAFF),
+              foregroundColor: Color(0xff1966FF),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              "Available",
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            ),
           ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        SizedBox(
+          width: 90,
+          height: 30,
+          child: ElevatedButton(
+            onPressed: () {
+              Get.to(const SearchBookedView());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xffC7DAFF),
+              foregroundColor: Color(0xff1966FF),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              "Booked",
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        SizedBox(
+          width: 92,
+          height: 30,
+          child: ElevatedButton(
+            onPressed: () {
+              Get.to(const SearchRentView());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xffC7DAFF),
+              foregroundColor: Color(0xff1966FF),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              "On Rent",
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CardBooked extends StatelessWidget {
+  const CardBooked({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Column(
+        children: [
+          CardListOnBook()
         ],
-        currentIndex: 1,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+      ),
+    );
+  }
+}
+
+class CardAvailable extends StatelessWidget {
+  const CardAvailable({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Column(
+        children: [
+          CardListMotor(
+
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CardRent extends StatelessWidget {
+  const CardRent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Column(
+        children: [
+       CardListOnRent()
+        ],
       ),
     );
   }
