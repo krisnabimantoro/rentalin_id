@@ -123,6 +123,7 @@ class BtnUpRent extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
+          Get.to(RentView());
           // Get.to(RentDetail());
         },
         style: ElevatedButton.styleFrom(

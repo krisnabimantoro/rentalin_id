@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:rentalin_id/app/modules/Booking/views/booking_view.dart';
+import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/rent/views/rentDetail_view.dart';
 
 import '../../../data/constant/color.dart';
@@ -286,7 +288,7 @@ class BtnBook extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(RentDetail());
+          Get.to(HomeView());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xffFF9500),
@@ -314,7 +316,7 @@ class BtnRent extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(Rent4View());
+          Get.to(HomeView());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xff34C759),

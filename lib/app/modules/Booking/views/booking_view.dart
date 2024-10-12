@@ -121,7 +121,7 @@ class BtnUpBook extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(Rent4View());
+          Get.to(RentView());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xffFF9500),

@@ -111,18 +111,18 @@ class DetailManageMotorcycleView extends StatelessWidget {
                       // Define what happens when "Go Back" is pressed
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: tdBlue,
+                      foregroundColor: Colors.red,
                       backgroundColor: Colors.white, // Text color
-                      side: BorderSide(color: tdBlue), // Border color
+                      side: BorderSide(color: Colors.red), // Border color
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
                     child: Text(
-                      'Go Back',
+                      'Delete',
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.red,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
