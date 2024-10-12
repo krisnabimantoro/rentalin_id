@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/calendar/bindings/calendar_binding.dart';
+import '../modules/calendar/views/calendar_view.dart';
 import '../modules/history-page/bindings/history_page_binding.dart';
 import '../modules/history-page/views/history_page_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -22,7 +24,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HISTORY_PAGE;
+  static const INITIAL = Routes.CALENDAR;
 
   static final routes = [
     GetPage(
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.HISTORY_PAGE,
       page: () => const HistoryPageView(),
       binding: HistoryPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CALENDAR,
+      page: () => const CalendarView(),
+      binding: CalendarBinding(),
     ),
   ];
 }

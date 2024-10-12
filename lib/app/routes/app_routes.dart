@@ -12,6 +12,7 @@ abstract class Routes {
   static const MANAGE_MOTORCYCLE = _Paths.MANAGE_MOTORCYCLE;
   static const HISTORY = _Paths.HISTORY;
   static const HISTORY_PAGE = _Paths.HISTORY_PAGE;
+  static const CALENDAR = _Paths.CALENDAR;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const MANAGE_MOTORCYCLE = '/manage-motorcycle';
   static const HISTORY = '/history';
   static const HISTORY_PAGE = '/history-page';
+  static const CALENDAR = '/calendar';
 }
