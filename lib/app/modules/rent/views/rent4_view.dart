@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:rentalin_id/app/modules/rent/views/rentDetail_view.dart';
 
 import '../../../data/constant/color.dart';
 import '../../../widgets/app_bar.components.dart';
@@ -285,7 +286,7 @@ class BtnBook extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: () {
-          Get.to(Rent4View());
+          Get.to(RentDetail());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xffFF9500),

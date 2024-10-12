@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rentalin_id/app/widgets/google_button.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
 import '../controllers/signup_controller.dart';
+import '../bindings/signup_binding.dart';
 
 class SignupUserView extends GetView<SignupController> {
   const SignupUserView({super.key});

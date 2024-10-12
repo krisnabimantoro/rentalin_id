@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/modules/calendar/views/calendar_view.dart';
@@ -19,36 +20,42 @@ class SearchView extends GetView<SearchingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: tdBg,
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ScrBar(),
+        backgroundColor: tdBg,
+        body: BottomBar(
+          width: 343,
+          barColor: Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          body: (BuildContext context, ScrollController controller) => ListView(
+            children: const [
               SizedBox(
-                width: 20,
+                height: 30,
               ),
-              Scr(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ScrBar(),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Scr(),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ScrOpAll(),
+              SizedBox(
+                height: 10,
+              ),
+              CardBooked(),
+              CardAvailable(),
+              CardRent(),
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
-          ScrOpAll(),
-          SizedBox(
-            height: 10,
-          ),
-          CardBooked(),
-          CardAvailable(),
-          CardRent(),
-        ],
-      ),
-      // bottomNavigationBar: BottomFloatBar()
-    );
+          child: ChildBottomBar(),
+        )
+        // bottomNavigationBar: BottomFloatBar()
+        );
   }
 }
 
@@ -59,7 +66,6 @@ class Scr extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      
       height: 50,
       width: 50,
       decoration: BoxDecoration(
@@ -92,34 +98,34 @@ class ScrBar extends StatelessWidget {
       width: 284,
       // padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-          color: Color(0xffffffff),
-          borderRadius: BorderRadius.circular(20),
-          // border: Border.all(color: Color(0xff1966FF))
-          ),
+        color: Color(0xffffffff),
+        borderRadius: BorderRadius.circular(20),
+        // border: Border.all(color: Color(0xff1966FF))
+      ),
       child: const TextField(
-          cursorColor: tdSecBlue,
-          style: TextStyle(color: tdBlue, fontSize: 16),
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: tdSecBlue),
-              borderRadius: BorderRadius.all(Radius.circular(1000)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: tdSecBlue),
-              borderRadius: BorderRadius.all(Radius.circular(1000)),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: tdSecBlue),
-              borderRadius: BorderRadius.all(Radius.circular(1000)),
-            ),
-            fillColor: tdWhite,
-            hoverColor: tdSecBlue,
-            filled: true,
-            alignLabelWithHint: false,
-            hintText: "Searching",
-            hintStyle: TextStyle(color: tdSecBlue),
+        cursorColor: tdSecBlue,
+        style: TextStyle(color: tdBlue, fontSize: 16),
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: tdSecBlue),
+            borderRadius: BorderRadius.all(Radius.circular(1000)),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: tdSecBlue),
+            borderRadius: BorderRadius.all(Radius.circular(1000)),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: tdSecBlue),
+            borderRadius: BorderRadius.all(Radius.circular(1000)),
+          ),
+          fillColor: tdWhite,
+          hoverColor: tdSecBlue,
+          filled: true,
+          alignLabelWithHint: false,
+          hintText: "Searching",
+          hintStyle: TextStyle(color: tdSecBlue),
         ),
+      ),
     );
   }
 }
@@ -237,9 +243,7 @@ class CardBooked extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
-        children: [
-          CardListOnBook()
-        ],
+        children: [CardListOnBook()],
       ),
     );
   }
@@ -257,11 +261,7 @@ class CardAvailable extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
-        children: [
-          CardListMotor(
-
-          )
-        ],
+        children: [CardListMotor()],
       ),
     );
   }
@@ -279,9 +279,7 @@ class CardRent extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
-        children: [
-       CardListOnRent()
-        ],
+        children: [CardListOnRent()],
       ),
     );
   }

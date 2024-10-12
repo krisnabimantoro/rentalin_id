@@ -6,6 +6,7 @@ import 'package:rentalin_id/app/modules/Rent/views/rent2_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_password_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
+import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 import '../controllers/rent_controller.dart';
 
@@ -21,23 +22,28 @@ class RentView extends GetView<RentController> {
         toolbarHeight: 100,
         titleSpacing: 0,
         automaticallyImplyLeading: false,
-        title: const AppBarComponents(nameMenu: 'Rent Motorcycle',),
+        title: const AppBarComponents(
+          nameMenu: 'Rent Motorcycle',
+        ),
       ),
       body: SingleChildScrollView(
-            child: Column(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  motorP(),
-                  motorI(),
-               ],
-              ),
-                Info1(),
-                BtnN(),
+                motorP(),
+                motorI(),
               ],
             ),
-          ),
+            Info1(),
+            BtnN(),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -51,13 +57,12 @@ class motorP extends StatelessWidget {
       height: 128,
       width: 128,
       decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(8),
-        image: DecorationImage(
-          image: AssetImage("assets/img/img1.jpg"), 
-          fit: BoxFit.fill,
-        )
-      ),
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(8),
+          image: DecorationImage(
+            image: AssetImage("assets/img/img1.jpg"),
+            fit: BoxFit.fill,
+          )),
     );
   }
 }
@@ -73,19 +78,32 @@ class motorI extends StatelessWidget {
       height: 128,
       width: 200,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8,)
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(
+            8,
+          )),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text('Honda', style: TextStyle(fontSize: 13),),
-          Text('PCX 2024', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+          Text(
+            'Honda',
+            style: TextStyle(fontSize: 13),
+          ),
+          Text(
+            'PCX 2024',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
           Text('KH 1231 WG'),
-          Text('Type Matic', style: TextStyle(fontSize: 10),),
+          Text(
+            'Type Matic',
+            style: TextStyle(fontSize: 10),
+          ),
           Text(''),
-          Text('Rp 150.000/Day', style: TextStyle(color: tdBlue),),
+          Text(
+            'Rp 150.000/Day',
+            style: TextStyle(color: tdBlue),
+          ),
         ],
       ),
     );
@@ -109,41 +127,43 @@ class Info1 extends StatelessWidget {
       ),
       child: const Column(
         children: [
-          InputText(
+          InputTextNoIcon(
             labelText: 'Full Name', 
-            hintText: 'Enter your full name', 
-            iconPath: "assets/icon/lock.png",
+            hintText: 'Enter your full name'
           ),
-          SizedBox(height: 10,),
-          InputText(
+          SizedBox(
+            height: 10,
+          ),
+          InputTextNoIcon(
             labelText: 'Hometown', 
-            hintText: 'Enter your city of origin', 
-            iconPath: "assets/icon/lock.png",
+            hintText: 'Enter your city of origin'
           ),
-          SizedBox(height: 10,),
-          InputText(
+          SizedBox(
+            height: 10,
+          ),
+          InputTextNoIcon(
             labelText: 'No Handphone 1', 
-            hintText: 'Enter your No Handphone 1', 
-            iconPath: "assets/icon/lock.png",
+            hintText: 'Enter your No Handphone 1'
           ),
-          SizedBox(height: 10,),
-          InputText(
-            labelText: 'Full Name', 
-            hintText: 'Enter your No Handphone 2', 
-            iconPath: "assets/icon/lock.png",
+          SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
-          InputText(
+          InputTextNoIcon(
+            labelText: 'No Handphone 2', 
+            hintText: 'Enter your No Handphone 2'
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          InputTextNoIcon(
             labelText: 'Helm', 
-            hintText: 'Enter your helm', 
-            iconPath: "assets/icon/lock.png",
+            hintText: 'Enter your helm'
           ),
         ],
       ),
     );
   }
 }
-
 
 class BtnN extends StatelessWidget {
   const BtnN({super.key});

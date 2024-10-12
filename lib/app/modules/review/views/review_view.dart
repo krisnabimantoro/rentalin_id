@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/button_main.components.dart';
@@ -106,7 +107,7 @@ class ReviewView extends GetView<ReviewController> {
                       width: 70,
                       height: 70,
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {Get.to(HomeView());},
                           icon: Image.asset("assets/icon/star-notfill.png"))),
               ],
             ),
