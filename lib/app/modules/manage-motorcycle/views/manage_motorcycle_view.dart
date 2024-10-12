@@ -3,6 +3,7 @@ import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/views/add_motorcycle_view.dart';
 import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
 import 'package:rentalin_id/app/widgets/button_float.components.dart';
 import 'package:rentalin_id/app/widgets/cardManage.component.dart';
@@ -104,7 +105,10 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
                     height: 200,
                   ),
                   ButtonFloatComponents(
-                      buttonName: "Add New Motorcycle", nextPage: () {}),
+                      buttonName: "Add New Motorcycle",
+                      nextPage: () {
+                        Get.to(AddMotorcycleView());
+                      }),
                   SizedBox(
                     height: 14,
                   )
@@ -117,7 +121,6 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
     );
   }
 }
-
 
 class FilterComponent extends StatelessWidget {
   final String fillText;

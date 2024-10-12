@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_password_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_view.dart';
-import 'package:rentalin_id/app/widgets/google_button.components.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rentalin_id/app/widgets/google_button.components.dart';
+import 'package:rentalin_id/app/widgets/input_text.components.dart';
 import '../controllers/signup_controller.dart';
-import '../../../widgets/input_text.components.dart';
 
 class SignupUserView extends GetView<SignupController> {
   const SignupUserView({super.key});
@@ -38,7 +38,7 @@ class SignupUserView extends GetView<SignupController> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 23, right: 23),
         child: Column(
-          // Set mainAxisSize to min to allow scrolling properly
+// Set mainAxisSize to min to allow scrolling properly
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

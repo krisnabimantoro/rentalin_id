@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 
@@ -16,7 +15,7 @@ class ButtonMainComponents extends StatelessWidget {
         height: 52,
         child: ElevatedButton(
           onPressed: () {
-            nextPage;
+            nextPage();
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: tdBlue,

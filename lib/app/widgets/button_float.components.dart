@@ -15,7 +15,7 @@ class ButtonFloatComponents extends StatelessWidget {
         height: 52,
         child: FloatingActionButton(
           onPressed: () {
-            nextPage;
+            nextPage();
           },
           backgroundColor: tdBlue,
           foregroundColor: tdWhite,

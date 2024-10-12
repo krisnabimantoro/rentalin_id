@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/history-page/bindings/history_page_binding.dart';
+import '../modules/history-page/views/history_page_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -20,7 +22,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.MANAGE_MOTORCYCLE;
+  static const INITIAL = Routes.HISTORY_PAGE;
 
   static final routes = [
     GetPage(
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.MANAGE_MOTORCYCLE,
       page: () => const ManageMotorcycleView(),
       binding: ManageMotorcycleBinding(),
+    ),
+    GetPage(
+      name: _Paths.HISTORY_PAGE,
+      page: () => const HistoryPageView(),
+      binding: HistoryPageBinding(),
     ),
   ];
 }
