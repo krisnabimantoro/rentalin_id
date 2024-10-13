@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/data/models/motor.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/update_motorcycle_view.dart';
+import 'package:rentalin_id/app/modules/webview-page/views/webview_page_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
-import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 class DetailManageMotorcycleView extends StatelessWidget {
   final Datum dataLoad;
@@ -112,7 +112,7 @@ class DetailManageMotorcycleView extends StatelessWidget {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.back();
+                      Get.to(WebviewPageView());
                       // Define what happens when "Go Back" is pressed
                     },
                     style: ElevatedButton.styleFrom(
