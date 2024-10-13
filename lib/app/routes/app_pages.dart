@@ -22,6 +22,8 @@ import '../modules/search/bindings/search_binding.dart';
 import '../modules/search/views/search_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/webview-page/bindings/webview_page_binding.dart';
+import '../modules/webview-page/views/webview_page_view.dart';
 
 part 'app_routes.dart';
 
@@ -85,6 +87,11 @@ class AppPages {
       name: _Paths.RENT,
       page: () => const RentView(),
       binding: RentBinding(),
+    ),
+    GetPage(
+      name: _Paths.WEBVIEW_PAGE,
+      page: () => const WebviewPageView(),
+      binding: WebviewPageBinding(),
     ),
   ];
 }

@@ -2,18 +2,25 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/data/models/motor.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/detail_manage_motorcycle_view.dart';
 
 class CardManageMotor extends StatelessWidget {
+  final Datum dataLoad;
   const CardManageMotor({
     super.key,
+    required this.dataLoad,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(DetailManageMotorcycleView());
+        Get.to(
+            DetailManageMotorcycleView(
+              dataLoad: dataLoad,
+            ),
+            arguments: dataLoad);
       },
       child: Container(
         width: 344,
@@ -39,38 +46,40 @@ class CardManageMotor extends StatelessWidget {
                 Container(
                   width: 103,
                   height: 85,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("assets/img/img1.jpg"),
+                          image: NetworkImage(
+                              "http://10.0.2.2:4300/" + dataLoad.fileName),
                           fit: BoxFit.cover),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
+                      borderRadius: const BorderRadius.all(Radius.circular(8))),
                 ),
                 SizedBox(
                   width: 12,
                 ),
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Honda",
-                      style: TextStyle(fontSize: 10),
+                      dataLoad.motorType,
+                      style: const TextStyle(fontSize: 10),
                     ),
                     Text(
-                      "PCX 2024",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      dataLoad.motorName,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "KH 1231 WG",
+                      dataLoad.motorPlat,
                       style: TextStyle(fontSize: 11, color: tdGrey),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
                         Text(
-                          "Rp 150.000",
+                          dataLoad.pricePerDay.toString(),
                           style: TextStyle(
                               color: tdBlue, fontWeight: FontWeight.w700),
                         ),

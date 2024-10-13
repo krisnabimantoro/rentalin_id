@@ -6,7 +6,8 @@ import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/add_motorcycle_view.dart';
 import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
 import 'package:rentalin_id/app/widgets/button_float.components.dart';
-import 'package:rentalin_id/app/widgets/cardManage.component.dart';
+import 'package:rentalin_id/app/widgets/button_main.components.dart';
+import 'package:rentalin_id/app/widgets/cardManage.component.dart'; 
 import 'package:rentalin_id/app/widgets/search_field.components.dart';
 
 import '../controllers/manage_motorcycle_controller.dart';
@@ -15,6 +16,7 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
   const ManageMotorcycleView({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.put(ManageMotorcycleController());
     return Scaffold(
       appBar: AppBar(
           scrolledUnderElevation: 0,
@@ -42,7 +44,7 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
             ),
           )),
       body: BottomBar(
-          body: (BuildContext context, ScrollController controller) {
+          body: (BuildContext context, ScrollController controllers) {
             return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -98,17 +100,34 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
                           const FilterComponent(fillText: "Suzuki")
                         ],
                       ),
-                      CardManageMotor(),
+                      Obx(() {
+                        if (controller.isLoading.value) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).colorScheme.secondary),
+                            ),
+                          );
+                        } else {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: controller.data.length,
+                            itemBuilder: (context, index) {
+                              var data = controller.data[index];
+                              return CardManageMotor(dataLoad:data ,);
+                            },
+                          );
+                        }
+                      })
                     ],
                   ),
                   SizedBox(
-                    height: 200,
+                    height: 10,
                   ),
-                  ButtonFloatComponents(
-                      buttonName: "Add New Motorcycle",
-                      nextPage: () {
+                  ButtonMainComponents(  buttonName: "Add New Motorcycle", nextPage: () {
                         Get.to(AddMotorcycleView());
                       }),
+                   
                   SizedBox(
                     height: 14,
                   )
@@ -121,6 +140,7 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
     );
   }
 }
+
 
 class FilterComponent extends StatelessWidget {
   final String fillText;

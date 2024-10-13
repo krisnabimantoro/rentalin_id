@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/data/models/motor.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/update_motorcycle_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 class DetailManageMotorcycleView extends StatelessWidget {
+  final Datum dataLoad;
+
+  const DetailManageMotorcycleView({super.key, required this.dataLoad});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +37,10 @@ class DetailManageMotorcycleView extends StatelessWidget {
                 Container(
                   width: 344,
                   height: 148,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("assets/img/img1.jpg"),
+                          image: NetworkImage(
+                              "http://10.0.2.2:4300/" + dataLoad.fileName),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                 ),
@@ -50,10 +55,10 @@ class DetailManageMotorcycleView extends StatelessWidget {
                   margin: EdgeInsets.only(top: 10),
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -76,15 +81,15 @@ class DetailManageMotorcycleView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
+                          const Text(
                             "",
                           ),
-                          Text("Honda"),
-                          Text("Nmax 2024"),
-                          Text("Matic"),
-                          Text("KH 2012 WG"),
+                          Text(dataLoad.motorType),
+                          Text(dataLoad.motorName),
+                          const Text("Matic"),
+                          Text(dataLoad.motorPlat),
                           Text(
-                            "Rp. 150.000",
+                            dataLoad.pricePerDay.toString(),
                             style: TextStyle(color: tdgreen),
                           ),
                         ],
