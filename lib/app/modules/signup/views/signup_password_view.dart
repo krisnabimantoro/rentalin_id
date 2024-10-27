@@ -31,8 +31,8 @@ class SignupPasswordView extends GetView<SignupController> {
                 child: Image.asset("assets/icon/arrow-left.png"),
               )),
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 23, right: 23),
+        body: const SingleChildScrollView(
+          padding: EdgeInsets.only(left: 23, right: 23),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -40,7 +40,7 @@ class SignupPasswordView extends GetView<SignupController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /*2*/
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(bottom: 0),
                     child: Text(
                       "Create Your Account",
@@ -51,34 +51,32 @@ class SignupPasswordView extends GetView<SignupController> {
                     ),
                   ),
                   /*3*/
-                  const Text(
+                  Text(
                     "Welcome to rentalin.id",
                     style: TextStyle(color: tdGrey, fontSize: 16),
                   ),
-                  const Padding(
+                  Padding(
                       padding: EdgeInsets.only(top: 190),
                       child: InputText(
                           labelText: "Password",
                           hintText: "Enter tour password",
                           iconPath: "assets/icon/lock.png")),
-                  const Padding(
+                  Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: InputText(
                           labelText: "Confirm Password",
                           hintText: "Enter your confirm password",
                           iconPath: "assets/icon/lock.png")),
-                  const Padding(
+                  Padding(
                       padding: EdgeInsets.only(top: 50), child: ButtonNext()),
                   Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: EdgeInsets.only(top: 10),
                       child: ButtonGoogle(
                         iconPath: "assets/icon/google.png",
                         labelText: "Sign in with Google",
-                        onPressed: () {
-                          print("Button pressed!");
-                        },
+                       
                       )),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

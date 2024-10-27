@@ -125,14 +125,12 @@ class SignupUserView extends GetView<SignupController> {
               padding: EdgeInsets.only(top: 30),
               child: ButtonNext(),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
+            const Padding(
+              padding: EdgeInsets.only(top: 10),
               child: ButtonGoogle(
                 iconPath: "assets/icon/google.png",
                 labelText: "Sign in with Google",
-                onPressed: () {
-                  print("button pressed");
-                },
+                
               ),
             ),
             const Padding(

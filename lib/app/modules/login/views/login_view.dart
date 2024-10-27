@@ -11,6 +11,8 @@ import 'package:rentalin_id/app/widgets/input_text.components.dart';
 
 import '../controllers/login_controller.dart';
 
+
+
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   @override
@@ -88,7 +90,7 @@ class LoginView extends GetView<LoginController> {
                   child: ButtonMainComponents(
                       buttonName: "Login",
                       nextPage: () {
-                       Get.offAndToNamed(Routes.HOME);
+                        Get.offAndToNamed(Routes.HOME);
                       }))
             ]),
             Padding(
@@ -96,9 +98,7 @@ class LoginView extends GetView<LoginController> {
                 child: ButtonGoogle(
                   iconPath: "assets/icon/google.png",
                   labelText: "Sign in with Google",
-                  onPressed: () {
-                    print("Button pressed!");
-                  },
+                  
                 )),
             Padding(
               padding: const EdgeInsets.only(top: 15),

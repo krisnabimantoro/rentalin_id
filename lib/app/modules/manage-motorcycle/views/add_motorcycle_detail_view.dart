@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
-import 'package:rentalin_id/app/widgets/button_main.components.dart';
-import 'package:rentalin_id/app/widgets/input_text.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
 class AddMotorcycleDetailView extends StatelessWidget {

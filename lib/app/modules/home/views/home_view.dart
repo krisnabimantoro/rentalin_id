@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
-import 'package:rentalin_id/app/modules/login/views/login_view.dart';
-import 'package:rentalin_id/app/modules/manage-motorcycle/views/add_motorcycle_view.dart';
-import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
 import 'package:rentalin_id/app/modules/notification/views/notification_view.dart';
 import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
-import 'package:rentalin_id/app/widgets/button_float.components.dart';
 import 'package:rentalin_id/app/widgets/cardList.component.dart';
-import 'package:rentalin_id/app/widgets/cardManage.component.dart';
-import 'package:rentalin_id/app/widgets/search_field.components.dart';
 
 import '../controllers/home_controller.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';

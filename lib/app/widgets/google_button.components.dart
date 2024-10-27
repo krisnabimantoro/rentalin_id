@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 
-class ButtonGoogle extends StatelessWidget {
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:rentalin_id/app/routes/app_pages.dart';
+
+import '../data/services/auth.controller.dart';
+
+class ButtonGoogle extends StatefulWidget {
   final String iconPath;
   final String labelText;
-  final VoidCallback onPressed;
 
-  const ButtonGoogle(
-      {super.key, required this.iconPath, required this.labelText,required this.onPressed,});
+  const ButtonGoogle({
+    super.key,
+    required this.iconPath,
+    required this.labelText,
+  });
+
+  @override
+  State<ButtonGoogle> createState() => _ButtonGoogleState();
+}
+
+class _ButtonGoogleState extends State<ButtonGoogle> {
+  // ValueNotifier userCredential = ValueNotifier('');
+  ValueNotifier<UserCredential?> userCredential =
+      ValueNotifier(null); // Use UserCredential type
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +33,18 @@ class ButtonGoogle extends StatelessWidget {
         width: 380,
         height: 52,
         child: ElevatedButton.icon(
-          onPressed: onPressed,
+          onPressed: () async {
+            userCredential.value = await signInWithGoogle();
+
+            if (userCredential.value != null) {
+              Get.offAndToNamed(Routes.HOME);
+            } else {
+              print('Login failed');
+            }
+          },
           icon: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(iconPath),
+            child: Image.asset(widget.iconPath),
           ),
           style: ElevatedButton.styleFrom(
               backgroundColor: tdWhite,
@@ -28,7 +54,7 @@ class ButtonGoogle extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               )),
           label: Text(
-            labelText,
+            widget.labelText,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
         ));
