@@ -6,6 +6,8 @@ import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/profile/views/editprofile_view.dart';
 import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
 
+import '../../../data/services/auth.controller.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -48,7 +50,7 @@ class ProfileView extends GetView<ProfileController> {
                           Get.to(EditprofileView());
                         },
                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
@@ -77,6 +79,66 @@ class ProfileView extends GetView<ProfileController> {
                                 ),
                                 const Text(
                                   "User Management",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 24,
+                              height: 24,
+                              // padding: EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
+                                  color: tdWhite,
+                                  shape: BoxShape.rectangle,
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/icon/chevron-down.png"))),
+                            ),
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          bool result = await signOutFromGoogle();
+                          if (result) {
+                            Get.offAndToNamed(Routes.LOGIN);
+                          } else {
+                            print('Logout failed');
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 15),
+                                  width: 50,
+                                  height: 50,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: tdGrey),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12))),
+                                  child: Container(
+                                    width: 24,
+                                    height: 24,
+                                    // padding: EdgeInsets.all(10),
+                                    decoration: const BoxDecoration(
+                                        color: tdWhite,
+                                        shape: BoxShape.rectangle,
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/icon/user-cog.png"))),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Text(
+                                  "Logout",
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),

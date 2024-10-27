@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,12 +8,28 @@ import 'package:rentalin_id/app/modules/manage-motorcycle/views/update_motorcycl
 import 'package:rentalin_id/app/modules/webview-page/views/webview_page_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 
+import '../controllers/manage_motorcycle_controller.dart';
+
 class DetailManageMotorcycleView extends StatelessWidget {
   final Datum dataLoad;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final ManageMotorcycleController _controller =
+      Get.put(ManageMotorcycleController());
+  final String motorcycleId;
 
-  const DetailManageMotorcycleView({super.key, required this.dataLoad});
+  Stream<QuerySnapshot> _getTasks() {
+    return _firestore.collection('Manage Motorcycle').snapshots();
+  }
+
+  DetailManageMotorcycleView(
+      {super.key, required this.dataLoad, required this.motorcycleId});
+
+  String? get id => null;
+
   @override
   Widget build(BuildContext context) {
+    _controller.fetchMotorcycleDetails(motorcycleId);
+    var data = _controller.motorcycle;
     return Scaffold(
       appBar: AppBar(
           // surfaceTintColor: tdGrey,
@@ -58,22 +75,22 @@ class DetailManageMotorcycleView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "Detail Motor",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
-                          Text("Merk Motor"),
-                          Text("Motor Name"),
-                          Text("Type Motor"),
-                          Text("Plat Motor"),
+                          Text(data['Merk Motor'] ?? ''),
+                          Text(data['Motor Name'] ?? ''),
+                          Text(data['Type Motor'] ?? ''),
+                          Text(data['Plat Motor'] ?? ''),
                           Text(
-                            "Price/day",
-                            style: TextStyle(color: tdgreen),
+                            data['Price'] ?? '',
+                            style: const TextStyle(color: tdgreen),
                           ),
                         ],
                       ),
@@ -111,9 +128,14 @@ class DetailManageMotorcycleView extends StatelessWidget {
                   width: 163,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Get.to(WebviewPageView());
-                      // Define what happens when "Go Back" is pressed
+                    onPressed: () async {
+                      bool? confirmDelete = await _showDeleteDialog(context);
+                      if (confirmDelete == true) {
+                        await _firestore
+                            .collection('Manage Motorcycle')
+                            .doc(id)
+                            .delete();
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.red,
@@ -169,4 +191,30 @@ class DetailManageMotorcycleView extends StatelessWidget {
     );
     // TODO: implement build
   }
+}
+
+Future<bool?> _showDeleteDialog(BuildContext context) async {
+  return await showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Hapus Motor'),
+        content: Text('Apakah Anda yakin ingin menghapus Motor ini?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false); // Kembali dengan false
+            },
+            child: Text('Batal'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true); // Kembali dengan true
+            },
+            child: Text('Hapus'),
+          ),
+        ],
+      );
+    },
+  );
 }

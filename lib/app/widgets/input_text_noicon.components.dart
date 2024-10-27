@@ -4,12 +4,13 @@ import 'package:rentalin_id/app/data/constant/color.dart';
 class InputTextNoIcon extends StatelessWidget {
   final String labelText; // Label text
   final String hintText; // Hint text
-  // Path to the icon
+  final Function(String)? onChanged;
 
   const InputTextNoIcon({
     super.key,
     required this.labelText,
     required this.hintText,
+    this.onChanged,
   });
 
   @override
@@ -26,6 +27,7 @@ class InputTextNoIcon extends StatelessWidget {
           ),
         ),
         TextField(
+          onChanged: onChanged,
           cursorColor: tdSecBlue,
           style: const TextStyle(color: tdBlue, fontSize: 16),
           decoration: InputDecoration(

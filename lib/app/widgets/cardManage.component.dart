@@ -18,7 +18,7 @@ class CardManageMotor extends StatelessWidget {
       onTap: () {
         Get.to(
             DetailManageMotorcycleView(
-              dataLoad: dataLoad,
+              dataLoad: dataLoad, motorcycleId: '',
             ),
             arguments: dataLoad);
       },

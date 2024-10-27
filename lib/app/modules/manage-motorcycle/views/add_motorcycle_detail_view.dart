@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -5,9 +6,16 @@ import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
-class AddMotorcycleDetailView extends StatelessWidget {
+import '../controllers/add_motorcyle_controller.dart';
+import '../models/motorcycle.dart';
+
+class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => AddMotorcycleController());
+    final Motorcycle motorcycle = Get.arguments;
+
     return Scaffold(
       appBar: AppBar(
           // surfaceTintColor: tdGrey,
@@ -45,10 +53,10 @@ class AddMotorcycleDetailView extends StatelessWidget {
               height: 217,
               margin: EdgeInsets.only(top: 10),
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -67,31 +75,48 @@ class AddMotorcycleDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         "",
                       ),
-                      Text("Honda"),
-                      Text("Nmax 2024"),
-                      Text("Matic"),
-                      Text("KH 2012 WG"),
+                      Text(motorcycle.merkMotor),
+                      Text(motorcycle.motorName),
+                      Text(motorcycle.typeMotor),
+                      Text(motorcycle.platMotor),
                     ],
                   )
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: InputTextNoIcon(
-                labelText: "Is Recommendation",
-                hintText: "Yes",
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Obx(
+                    () => Checkbox(
+                      value: controller.motorcycle.value.isRecommended,
+                      onChanged: (value) {
+                        // Update the controller's value when the checkbox is toggled
+                        controller.motorcycle.value.isRecommended =
+                            value ?? false;
+                      },
+                    ),
+                  ),
+                  const Text('Recommended'),
+                ],
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
-                labelText: "Price/Day",
-                hintText: "Rp. 150.000",
-              ),
+                  labelText: "Price/Day",
+                  hintText: "Rp. 150.000",
+                  onChanged: (value) {
+                    double? price = double.tryParse(value);
+                    if (price != null) {
+                      controller.motorcycle.value.pricePerDay = price;
+                    }
+                  }),
             ),
             SizedBox(
               height: 20,
@@ -133,7 +158,17 @@ class AddMotorcycleDetailView extends StatelessWidget {
                   width: 163,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      CollectionReference addMotor =
+                          firestore.collection("Manage MotorCycle");
+                      await addMotor.add({
+                        'Merk Motor': motorcycle.merkMotor,
+                        'Motor Name': motorcycle.motorName,
+                        'Plat Motor': motorcycle.platMotor,
+                        'Price/Day': motorcycle.pricePerDay,
+                        'Recommendation': motorcycle.isRecommended,
+                        'Type Motor': motorcycle.typeMotor
+                      });
                       // Define what happens when "Add New" is pressed
                     },
                     style: ElevatedButton.styleFrom(

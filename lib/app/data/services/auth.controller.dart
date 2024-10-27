@@ -23,3 +23,12 @@ Future<dynamic> signInWithGoogle() async {
     return null;
   }
 }
+
+Future<bool> signOutFromGoogle() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
+  }
