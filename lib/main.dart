@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/data/services/notification.handler.dart';
 import 'package:rentalin_id/firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 import 'app/routes/app_pages.dart';
@@ -13,6 +15,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Get.putAsync(() async => await SharedPreferences.getInstance());
+  await FirebaseMessagingHandler().initPushNotification();
+  // await FirebaseMessagingHandler().initLocalNotification();
+
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

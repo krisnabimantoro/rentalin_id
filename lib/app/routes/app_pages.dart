@@ -65,7 +65,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MANAGE_MOTORCYCLE,
-      page: () => const ManageMotorcycleView(),
+      page: () =>  ManageMotorcycleView(),
       binding: ManageMotorcycleBinding(),
     ),
     GetPage(
