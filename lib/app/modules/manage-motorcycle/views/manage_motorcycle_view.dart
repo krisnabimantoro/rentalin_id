@@ -132,7 +132,7 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
                               Map<String, dynamic> data =
                                   document.data() as Map<String, dynamic>;
 
-                              print(document.id);
+                              // print(document.id);
                               // return data['documentId'];
                               return CardManageMotorFirebase(
                                 motorcycleId: document.id,
@@ -172,9 +172,6 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
                   //   }
                   // })
 
-                  SizedBox(
-                    height: 10,
-                  ),
                   ButtonMainComponents(
                       buttonName: "Add New Motorcycle",
                       nextPage: () {

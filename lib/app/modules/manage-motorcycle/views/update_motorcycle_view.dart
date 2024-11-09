@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/models/motorcycle.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/add_motorcycle_detail_view.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/update_motorcycle_detail_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
@@ -9,9 +11,13 @@ import 'package:rentalin_id/app/widgets/button_main.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 
-class UpdateMotorcycleView extends StatelessWidget {
+class UpdateMotorcycleView extends GetView<AddMotorcycleController> {
   @override
   Widget build(BuildContext context) {
+    
+    Get.lazyPut(() => AddMotorcycleController());
+    final Motorcycle motorcycle = Get.arguments;
+
     return Scaffold(
       appBar: AppBar(
           // surfaceTintColor: tdGrey,
@@ -64,32 +70,41 @@ class UpdateMotorcycleView extends StatelessWidget {
                     ))
               ],
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Merk Motor",
-                hintText: "Honda",
+                hintText: motorcycle.merkMotor.toString(),
+                onChanged: (value) =>
+                      controller.motorcycle.value.merkMotor = value
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Motor Name",
-                hintText: "PCX",
+                hintText: motorcycle.motorName.toString(),
+                onChanged: (value) =>
+                      controller.motorcycle.value.motorName = value
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Type Motor",
-                hintText: "Matic",
+                hintText: motorcycle.typeMotor.toString(),
+                onChanged: (value) =>
+                      controller.motorcycle.value.typeMotor = value
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputTextNoIcon(
                 labelText: "Plat Motor",
-                hintText: "KH 1213 WH",
+                hintText: motorcycle.platMotor.toString(),
+                onChanged: (value) =>
+                      controller.motorcycle.value.platMotor = value ,
+            
               ),
             ),
             Padding(
@@ -97,7 +112,7 @@ class UpdateMotorcycleView extends StatelessWidget {
               child: ButtonMainComponents(
                   buttonName: "Next",
                   nextPage: () {
-                    Get.to(UpdateMotorcycleDetailView());
+                    Get.to(UpdateMotorcycleDetailView(), arguments: motorcycle);
                   }),
             )
           ],

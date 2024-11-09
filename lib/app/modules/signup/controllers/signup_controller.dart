@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rentalin_id/app/modules/signup/models/users.dart';
 
 class SignupController extends GetxController {
   Future<void> checkPermissions() async {
@@ -14,6 +15,14 @@ class SignupController extends GetxController {
   var selectedImagePath = ''.obs; // Observable for image path
   var selectedImageSize = ''.obs; // Observable for image size
 
+  var users = Users(
+          usersId: '',
+          emailAddress: '',
+          fileName: '',
+          fullName: '',
+          nameRent: '',
+          password: '')
+      .obs;
   // Future<XFile?> pickImage() async {
   //   final imagePicker = ImagePicker();
   //   final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);

@@ -10,7 +10,9 @@ import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/manage_mot
 import 'package:rentalin_id/app/modules/manage-motorcycle/models/motorcycle.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/detail_manage_motorcycle_view.dart';
 
-class CardManageMotorFirebase extends StatelessWidget {
+import '../modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
+
+class CardManageMotorFirebase extends GetView<AddMotorcycleController> {
   // final Datum dataLoad;
   // final FirebaseFirestore firestore = FirebaseFirestore.instance;
   // final ManageMotorcycleController controller = Get.put(ManageMotorcycleController());
@@ -41,6 +43,8 @@ class CardManageMotorFirebase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => AddMotorcycleController());
+
     // return StreamBuilder<DocumentSnapshot>(
     // stream: FirebaseFirestore.instance
     //     .collection('Manage MotorCycle')
@@ -56,24 +60,27 @@ class CardManageMotorFirebase extends StatelessWidget {
     // }
 
     // var data = snapshot.data!;
+
+   
+    // print(controller.motorcycle.value.motorcycleId);
     return InkWell(
       onTap: () {
         if (motorcycleId == null) {
           print("Error: motorcycleId is null");
           return;
         }
-        Get.to(
-          DetailManageMotorcycleView(),
-          arguments: {
-            'motorcycleId': motorcycleId,
-            'merkMotor': merkMotor,
-            'motorName': motorName,
-            'platMotor': platMotor,
-            'pricePerDay': pricePerDay,
-            'recommendation': recommendation,
-            'typeMotor': typeMotor,
-          },
-        );
+        Get.to(DetailManageMotorcycleView(),
+            // arguments: controller.motorcycle.value
+            arguments: {
+              'motorcycleId': motorcycleId,
+              'merkMotor': merkMotor,
+              'motorName': motorName,
+              'platMotor': platMotor,
+              'pricePerDay': pricePerDay,
+              'recommendation': recommendation,
+              'typeMotor': typeMotor,
+            },
+            );
       },
       child: Container(
         width: 344,

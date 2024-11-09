@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/data/models/motor.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/models/motorcycle.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/update_motorcycle_view.dart';
@@ -12,7 +13,7 @@ import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 
 import '../controllers/manage_motorcycle_controller.dart';
 
-class DetailManageMotorcycleView extends StatefulWidget {
+class DetailManageMotorcycleView extends GetView<AddMotorcycleController> {
   // final Datum dataLoad;
   // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   // final ManageMotorcycleController _controller =
@@ -36,22 +37,18 @@ class DetailManageMotorcycleView extends StatefulWidget {
     super.key,
   });
 
-  @override
-  State<DetailManageMotorcycleView> createState() =>
-      _DetailManageMotorcycleViewState();
-}
-
-class _DetailManageMotorcycleViewState
-    extends State<DetailManageMotorcycleView> {
   String? get id => null;
 
   @override
   Widget build(BuildContext context) {
     // _controller.fetchMotorcycleDetails(motorcycleId);
     // var data = _controller.motorcycle;
-    final arguments = Get.arguments ?? {};
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    Get.lazyPut(() => AddMotorcycleController());
+    // final Motorcycle motorcycle = Get.arguments as Motorcycle;
 
-    // Access each argument with fallback values to handle nulls
+    final arguments = Get.arguments;
+
     final String motorcycleId = arguments['motorcycleId'] ?? 'Unknown ID';
     final String merkMotor = arguments['merkMotor'] ?? 'Unknown Merk';
     final String motorName = arguments['motorName'] ?? 'Unknown Name';
@@ -60,9 +57,15 @@ class _DetailManageMotorcycleViewState
     final bool recommendation = arguments['recommendation'] ?? false;
     final String typeMotor = arguments['typeMotor'] ?? 'Unknown Type';
 
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    controller.motorcycle.value.motorcycleId = motorcycleId;
+    controller.motorcycle.value.merkMotor = merkMotor;
+    controller.motorcycle.value.motorName = motorName;
+    controller.motorcycle.value.platMotor = platMotor;
+    controller.motorcycle.value.pricePerDay = pricePerDay;
+    controller.motorcycle.value.isRecommended = recommendation;
+    controller.motorcycle.value.typeMotor = typeMotor;
 
-    print(motorcycleId);
+    print("cek ${controller.motorcycle.value.motorcycleId}");
     return Scaffold(
       appBar: AppBar(
           // surfaceTintColor: tdGrey,
@@ -212,7 +215,8 @@ class _DetailManageMotorcycleViewState
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(UpdateMotorcycleView());
+                      Get.to(UpdateMotorcycleView(),
+                          arguments: controller.motorcycle.value);
                       // Define what happens when "Add New" is pressed
                     },
                     style: ElevatedButton.styleFrom(

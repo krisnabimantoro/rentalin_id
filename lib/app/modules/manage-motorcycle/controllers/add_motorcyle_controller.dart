@@ -3,6 +3,7 @@ import '../models/motorcycle.dart';
 
 class AddMotorcycleController extends GetxController {
   var motorcycle = Motorcycle(
+    motorcycleId:'',
     merkMotor: '',
     motorName: '',
     typeMotor: '',

@@ -78,10 +78,10 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                       const Text(
                         "",
                       ),
-                      Text(motorcycle.merkMotor),
-                      Text(motorcycle.motorName),
-                      Text(motorcycle.typeMotor),
-                      Text(motorcycle.platMotor),
+                      Text(motorcycle.merkMotor??''),
+                      Text(motorcycle.motorName??''),
+                      Text(motorcycle.typeMotor??''),
+                      Text(motorcycle.platMotor??''),
                     ],
                   )
                 ],
