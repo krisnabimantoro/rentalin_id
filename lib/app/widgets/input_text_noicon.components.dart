@@ -5,12 +5,14 @@ class InputTextNoIcon extends StatelessWidget {
   final String labelText; // Label text
   final String hintText; // Hint text
   final Function(String)? onChanged;
+  final TextEditingController? controllerSignup;
 
   const InputTextNoIcon({
     super.key,
     required this.labelText,
     required this.hintText,
     this.onChanged,
+    this.controllerSignup,
   });
 
   @override
@@ -27,6 +29,7 @@ class InputTextNoIcon extends StatelessWidget {
           ),
         ),
         TextField(
+          controller: controllerSignup,
           onChanged: onChanged,
           cursorColor: tdSecBlue,
           style: const TextStyle(color: tdBlue, fontSize: 16),

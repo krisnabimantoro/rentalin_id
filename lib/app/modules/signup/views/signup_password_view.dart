@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:rentalin_id/app/modules/login/views/login_view.dart';
 import 'package:rentalin_id/app/modules/notification/views/notification_view.dart';
 // import 'package:rentalin_id/app/modules/search/controllers/search_controller.dart';
 import 'package:rentalin_id/app/modules/search/views/search_view.dart';
+import 'package:rentalin_id/app/modules/signup/models/users.dart';
 // import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_user_view.dart';
 import 'package:rentalin_id/app/widgets/google_button.components.dart';
@@ -19,6 +21,7 @@ class SignupPasswordView extends GetView<SignupController> {
   const SignupPasswordView({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SignupController());
     return Scaffold(
         appBar: AppBar(
           backgroundColor: tdBg,
@@ -31,8 +34,8 @@ class SignupPasswordView extends GetView<SignupController> {
                 child: Image.asset("assets/icon/arrow-left.png"),
               )),
         ),
-        body: const SingleChildScrollView(
-          padding: EdgeInsets.only(left: 23, right: 23),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.only(left: 23, right: 23),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -40,7 +43,7 @@ class SignupPasswordView extends GetView<SignupController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /*2*/
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(bottom: 0),
                     child: Text(
                       "Create Your Account",
@@ -51,32 +54,35 @@ class SignupPasswordView extends GetView<SignupController> {
                     ),
                   ),
                   /*3*/
-                  Text(
+                  const Text(
                     "Welcome to rentalin.id",
                     style: TextStyle(color: tdGrey, fontSize: 16),
                   ),
                   Padding(
-                      padding: EdgeInsets.only(top: 190),
+                      padding: const EdgeInsets.only(top: 190),
                       child: InputText(
-                          labelText: "Password",
-                          hintText: "Enter tour password",
-                          iconPath: "assets/icon/lock.png")),
-                  Padding(
+                        labelText: "Password",
+                        hintText: "Enter tour password",
+                        iconPath: "assets/icon/lock.png",
+                        controllerSignup: controller.passwordController,
+                        onChanged: (value) =>
+                            controller.users.value.password = value,
+                      )),
+                  const Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: InputText(
                           labelText: "Confirm Password",
                           hintText: "Enter your confirm password",
                           iconPath: "assets/icon/lock.png")),
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(top: 50), child: ButtonNext()),
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: ButtonGoogle(
                         iconPath: "assets/icon/google.png",
                         labelText: "Sign in with Google",
-                       
                       )),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -103,16 +109,32 @@ class SignupPasswordView extends GetView<SignupController> {
   }
 }
 
-class ButtonNext extends StatelessWidget {
+class ButtonNext extends GetView<SignupController> {
   const ButtonNext({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    final Users users = controller.users.value;
+
+    Get.lazyPut(() => SignupController());
     return SizedBox(
         width: 380,
         height: 52,
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
+            CollectionReference addUser = firestore.collection("users");
+            await addUser.add({
+              'email_address': users.emailAddress,
+              'file_name': users.fileName,
+              'full_name': users.fullName,
+              'name_rent': users.nameRent,
+              'phone_number': users.phoneNumber,
+              'password': users.password
+            });
+            await controller.registerUser();
+
             Get.to(const LoginView());
           },
           style: ElevatedButton.styleFrom(

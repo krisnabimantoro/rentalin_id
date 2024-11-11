@@ -5,12 +5,16 @@ class InputText extends StatelessWidget {
   final String labelText; // Label text
   final String hintText; // Hint text
   final String iconPath; // Path to the icon
+  final Function(String)? onChanged;
+  final TextEditingController? controllerSignup;
 
   const InputText({
     super.key,
     required this.labelText,
     required this.hintText,
     required this.iconPath,
+    this.onChanged,
+    this.controllerSignup,
   });
 
   @override
@@ -27,6 +31,8 @@ class InputText extends StatelessWidget {
           ),
         ),
         TextField(
+          controller: controllerSignup,
+          onChanged: onChanged,
           cursorColor: tdSecBlue,
           style: const TextStyle(color: tdBlue, fontSize: 16),
           decoration: InputDecoration(

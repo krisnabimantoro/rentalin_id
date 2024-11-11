@@ -24,6 +24,8 @@ class SignupUserView extends GetView<SignupController> {
 
   @override
   Widget build(BuildContext context) {
+    
+    Get.lazyPut(() => SignupController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: tdBg,
@@ -97,28 +99,33 @@ class SignupUserView extends GetView<SignupController> {
                     ))
               ],
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputText(
                 labelText: "Full Name",
                 hintText: "Enter your Full Name",
                 iconPath: "assets/icon/user.png",
+                onChanged: (value) => controller.users.value.fullName = value,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputText(
                 labelText: "Email Address",
                 hintText: "Enter your email address",
                 iconPath: "assets/icon/mail.png",
+                onChanged: (value) => controller.users.value.emailAddress = value,
+                controllerSignup: controller.emailController,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 10),
               child: InputText(
                 labelText: "Phone Number",
                 hintText: "Enter your phone number",
                 iconPath: "assets/icon/phone.png",
+                onChanged: (value) =>
+                    controller.users.value.phoneNumber = value,
               ),
             ),
             const Padding(
@@ -130,7 +137,6 @@ class SignupUserView extends GetView<SignupController> {
               child: ButtonGoogle(
                 iconPath: "assets/icon/google.png",
                 labelText: "Sign in with Google",
-                
               ),
             ),
             const Padding(

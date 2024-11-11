@@ -14,6 +14,7 @@ class SignupView extends GetView<SignupController> {
   const SignupView({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SignupController());
     return Scaffold(
         appBar: AppBar(
           backgroundColor: tdBg,
@@ -30,12 +31,12 @@ class SignupView extends GetView<SignupController> {
           padding: const EdgeInsets.only(left: 23, right: 23),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /*2*/
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(bottom: 0),
                     child: Text(
                       "Create Your Account",
@@ -46,26 +47,28 @@ class SignupView extends GetView<SignupController> {
                     ),
                   ),
                   /*3*/
-                  Text(
+                  const Text(
                     "Welcome to rentalin.id",
                     style: TextStyle(color: tdGrey, fontSize: 16),
                   ),
                   Padding(
-                      padding: EdgeInsets.only(top: 190),
+                      padding: const EdgeInsets.only(top: 190),
                       child: InputText(
-                          labelText: "Name Rent",
-                          hintText: "Enter tour name rent",
-                          iconPath: "assets/icon/building.png")),
-                  Padding(
+                        labelText: "Name Rent",
+                        hintText: "Enter tour name rent",
+                        iconPath: "assets/icon/building.png",
+                        onChanged: (value) =>
+                            controller.users.value.nameRent = value,
+                      )),
+                  const Padding(
                       padding: EdgeInsets.only(top: 170), child: ButtonNext()),
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: ButtonGoogle(
                         iconPath: "assets/icon/google.png",
                         labelText: "Sign in with Google",
-                        
                       )),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

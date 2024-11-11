@@ -5,6 +5,7 @@ class Users {
   String? fullName;
   String? nameRent;
   String? password;
+  String? phoneNumber;
 
   Users(
       {this.usersId,
@@ -12,5 +13,6 @@ class Users {
       this.fileName,
       this.fullName,
       this.nameRent,
-      this.password});
+      this.password,
+      this.phoneNumber});
 }
