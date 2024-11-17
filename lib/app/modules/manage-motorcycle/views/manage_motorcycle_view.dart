@@ -55,7 +55,8 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                // verticalDirection: VerticalDirection.up,
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Align(
@@ -105,7 +106,7 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
                     ],
                   ),
                   SizedBox(
-                      height: 700,
+                      height: 400,
                       child: StreamBuilder<QuerySnapshot>(
                         stream: firestore
                             .collection("Manage MotorCycle")
@@ -178,7 +179,7 @@ class ManageMotorcycleView extends GetView<ManageMotorcycleController> {
                         Get.to(AddMotorcycleView());
                       }),
                   SizedBox(
-                    height: 14,
+                    height: 1400,
                   )
                 ],
               ),

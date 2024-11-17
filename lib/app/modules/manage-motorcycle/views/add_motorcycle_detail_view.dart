@@ -1,19 +1,32 @@
+import 'dart:io';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
+import 'package:rentalin_id/app/widgets/videoPlayerWidget.dart';
 
 import '../controllers/add_motorcyle_controller.dart';
 import '../models/motorcycle.dart';
 
 class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  final AudioPlayer audioPlayer = AudioPlayer();
+
+  Future<void> playNotificationSound() async {
+    await audioPlayer.play(AssetSource('audio/notification.mp3'));
+  }
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
+      Get.lazyPut(()=>CameraController());
     final Motorcycle motorcycle = Get.arguments;
 
     return Scaffold(
@@ -34,15 +47,29 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 344,
-              height: 148,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/img/img1.jpg"),
-                      fit: BoxFit.cover),
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
-            ),
+            Obx(() {
+              final controller = Get.find<CameraController>();
+              return Container(
+                width: 344,
+                height: 148,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: controller.selectedImagePath.value.isNotEmpty
+                    ? Image.file(
+                        File(controller.selectedImagePath.value),
+                        fit: BoxFit.cover,
+                      )
+                    : controller.selectedVideoPath.value.isNotEmpty
+                        ? VideoPlayerWidget(
+                            videoPath: controller.selectedVideoPath.value,
+                          )
+                        : Image.asset(
+                            "assets/img/img1.jpg",
+                            fit: BoxFit.cover,
+                          ),
+              );
+            }),
             Container(
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -78,10 +105,10 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                       const Text(
                         "",
                       ),
-                      Text(motorcycle.merkMotor??''),
-                      Text(motorcycle.motorName??''),
-                      Text(motorcycle.typeMotor??''),
-                      Text(motorcycle.platMotor??''),
+                      Text(motorcycle.merkMotor ?? ''),
+                      Text(motorcycle.motorName ?? ''),
+                      Text(motorcycle.typeMotor ?? ''),
+                      Text(motorcycle.platMotor ?? ''),
                     ],
                   )
                 ],
@@ -169,6 +196,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                         'Recommendation': motorcycle.isRecommended,
                         'Type Motor': motorcycle.typeMotor
                       });
+                      await playNotificationSound();
                       // Define what happens when "Add New" is pressed
                     },
                     style: ElevatedButton.styleFrom(

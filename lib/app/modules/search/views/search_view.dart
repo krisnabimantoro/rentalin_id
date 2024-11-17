@@ -19,6 +19,8 @@ class SearchView extends GetView<SearchingController> {
   const SearchView({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SearchingController());
+    print("rill "+controller.text.value);
     return Scaffold(
         backgroundColor: tdBg,
         body: BottomBar(
@@ -38,6 +40,7 @@ class SearchView extends GetView<SearchingController> {
                     width: 20,
                   ),
                   Scr(),
+                  
                 ],
               ),
               SizedBox(
@@ -52,80 +55,96 @@ class SearchView extends GetView<SearchingController> {
               CardRent(),
             ],
           ),
-          child: ChildBottomBar(),
+          child: const ChildBottomBar(),
         )
         // bottomNavigationBar: BottomFloatBar()
         );
   }
 }
 
-class Scr extends StatelessWidget {
+class Scr extends GetView<SearchingController> {
   const Scr({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SearchingController());
     return Container(
       alignment: Alignment.center,
       height: 50,
       width: 50,
       decoration: BoxDecoration(
-        color: Color(0xff1966FF),
+        color: const Color(0xff1966FF),
         borderRadius: BorderRadius.circular(30),
       ),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            if (controller.isListening.value) {
+              controller.stopListening();
+            } else {
+              controller.startListening();
+            }
+          },
           style: ElevatedButton.styleFrom(
-            shape: CircleBorder(),
-            padding: EdgeInsets.all(0),
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(0),
             alignment: Alignment.center,
             backgroundColor: tdBlue,
             foregroundColor: tdWhite,
           ),
-          child: Icon(
-            Icons.search,
+          child: const Icon(
+            Icons.mic,
           )),
     );
   }
 }
 
-class ScrBar extends StatelessWidget {
+class ScrBar extends GetView<SearchingController> {
   const ScrBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SearchingController());
     return Container(
       height: 50,
       width: 284,
       // padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Color(0xffffffff),
+        color: const Color(0xffffffff),
         borderRadius: BorderRadius.circular(20),
         // border: Border.all(color: Color(0xff1966FF))
       ),
-      child: const TextField(
-        cursorColor: tdSecBlue,
-        style: TextStyle(color: tdBlue, fontSize: 16),
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: tdSecBlue),
-            borderRadius: BorderRadius.all(Radius.circular(1000)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: tdSecBlue),
-            borderRadius: BorderRadius.all(Radius.circular(1000)),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: tdSecBlue),
-            borderRadius: BorderRadius.all(Radius.circular(1000)),
-          ),
-          fillColor: tdWhite,
-          hoverColor: tdSecBlue,
-          filled: true,
-          alignLabelWithHint: false,
-          hintText: "Searching",
-          hintStyle: TextStyle(color: tdSecBlue),
-        ),
-      ),
+      child: Obx(() => TextField(
+            controller: TextEditingController(text: controller.text.value)
+              ..selection = TextSelection.fromPosition(
+                TextPosition(offset: controller.text.value.length),
+              ),
+            cursorColor: tdSecBlue,
+            style: const TextStyle(color: tdBlue, fontSize: 16),
+            decoration: const InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: tdSecBlue),
+                borderRadius: BorderRadius.all(Radius.circular(1000)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: tdSecBlue),
+                borderRadius: BorderRadius.all(Radius.circular(1000)),
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: tdSecBlue),
+                borderRadius: BorderRadius.all(Radius.circular(1000)),
+              ),
+              fillColor: tdWhite,
+              hoverColor: tdSecBlue,
+              contentPadding: EdgeInsets.only(left: 20),
+              filled: true,
+              alignLabelWithHint: false,
+              hintText: "Searching",
+              hintStyle: TextStyle(color: tdSecBlue),
+            ),
+            onChanged: (value) {
+              controller.text.value = value; // Update Rx observable
+            },
+          )),
     );
   }
 }
@@ -158,7 +177,7 @@ class ScrOpAll extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         SizedBox(
@@ -169,8 +188,8 @@ class ScrOpAll extends StatelessWidget {
               Get.to(const SearchAvailView());
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffC7DAFF),
-              foregroundColor: Color(0xff1966FF),
+              backgroundColor: const Color(0xffC7DAFF),
+              foregroundColor: const Color(0xff1966FF),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -181,7 +200,7 @@ class ScrOpAll extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         SizedBox(
@@ -192,8 +211,8 @@ class ScrOpAll extends StatelessWidget {
               Get.to(const SearchBookedView());
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffC7DAFF),
-              foregroundColor: Color(0xff1966FF),
+              backgroundColor: const Color(0xffC7DAFF),
+              foregroundColor: const Color(0xff1966FF),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -204,7 +223,7 @@ class ScrOpAll extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         SizedBox(
@@ -215,8 +234,8 @@ class ScrOpAll extends StatelessWidget {
               Get.to(const SearchRentView());
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffC7DAFF),
-              foregroundColor: Color(0xff1966FF),
+              backgroundColor: const Color(0xffC7DAFF),
+              foregroundColor: const Color(0xff1966FF),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -237,12 +256,12 @@ class CardBooked extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Column(
+      child: const Column(
         children: [CardListOnBook()],
       ),
     );
@@ -255,12 +274,12 @@ class CardAvailable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Column(
+      child: const Column(
         children: [CardListMotor()],
       ),
     );
@@ -273,12 +292,12 @@ class CardRent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Column(
+      child: const Column(
         children: [CardListOnRent()],
       ),
     );

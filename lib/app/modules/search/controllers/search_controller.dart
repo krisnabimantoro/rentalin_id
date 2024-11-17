@@ -1,23 +1,57 @@
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:speech_to_text/speech_to_text.dart' ;
 
 class SearchingController extends GetxController {
   //TODO: Implement SearchController
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    _initSpeech(); // Inisialisasi layanan pengenalan suara saat controller
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+// Instansiasi SpeechToText untuk menangani pengenalan suara
+  final SpeechToText _speech = SpeechToText();
+
+// Variabel observable untuk melacak status aplikasi
+  var isListening = false.obs; // Menunjukkan apakah aplikasi sedang
+  var text = "".obs; // Menyimpan teks yang dihasilkan dari pengenalan suara
+// Menginisialisasi fungsi pengenalan suara
+  void _initSpeech() async {
+    try {
+      await _speech.initialize();
+    } catch (e) {
+      print(e);
+    }
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+// Memeriksa dan meminta izin mikrofon
+  Future<void> checkMicrophonePermission() async {
+    var status = await Permission.microphone.status;
+    if (!status.isGranted) {
+// Jika izin belum diberikan, minta izin kepada pengguna
+      await Permission.microphone.request();
+    }
+  }
+// Memulai mendengarkan suara dan memperbarui variabel teks dengan kata-kata
+
+  void startListening() async {
+    await checkMicrophonePermission();
+    if (await Permission.microphone.isGranted) {
+      isListening.value = true;
+      await _speech.listen(onResult: (result) {
+// Memperbarui kata-kata yang dikenali ke dalam variabel teks
+        text.value = result.recognizedWords;
+      });
+    } else {
+      print("Izin mikrofon ditolak.");
+    }
   }
 
-  void increment() => count.value++;
+// Menghentikan proses pengenalan suara
+  void stopListening() async {
+    isListening.value = false;
+    await _speech.stop();
+  }
 }

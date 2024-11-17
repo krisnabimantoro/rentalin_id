@@ -13,7 +13,7 @@ plugins {
 
 android {
     namespace = "com.example.rentalin_id"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

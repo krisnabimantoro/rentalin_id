@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,7 @@ import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/read_motorcycle_controller.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/models/motorcycle.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/button_main.components.dart';
 import 'package:rentalin_id/app/widgets/input_text.components.dart';
@@ -18,6 +20,10 @@ class UpdateMotorcycleDetailView extends GetView<AddMotorcycleController> {
 
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     final Motorcycle motorcycle = Get.arguments;
+    final AudioPlayer audioPlayer = AudioPlayer();
+    Future<void> playNotificationSound() async {
+      await audioPlayer.play(AssetSource('audio/notification.mp3'));
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -102,8 +108,8 @@ class UpdateMotorcycleDetailView extends GetView<AddMotorcycleController> {
               child: InputTextNoIcon(
                   labelText: "Price/Day",
                   hintText: motorcycle.pricePerDay.toString(),
-                  onChanged: (value) =>
-                      controller.motorcycle.value.pricePerDay = value as double?),
+                  onChanged: (value) => controller
+                      .motorcycle.value.pricePerDay = value as double?),
             ),
             SizedBox(
               height: 20,
@@ -146,6 +152,7 @@ class UpdateMotorcycleDetailView extends GetView<AddMotorcycleController> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
+                      await playNotificationSound();
                       await firestore
                           .collection('Manage MotorCycle')
                           .doc(motorcycle.motorcycleId)
@@ -157,6 +164,7 @@ class UpdateMotorcycleDetailView extends GetView<AddMotorcycleController> {
                         'Recommendation': motorcycle.isRecommended,
                         'Type Motor': motorcycle.typeMotor
                       });
+                      Get.off(ManageMotorcycleView());
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
