@@ -19,6 +19,7 @@ class AddMotorcycleView extends GetView<AddMotorcycleController> {
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
     Get.lazyPut(()=>CameraController());
+    
     return Scaffold(
       appBar: AppBar(
           // surfaceTintColor: tdGrey,

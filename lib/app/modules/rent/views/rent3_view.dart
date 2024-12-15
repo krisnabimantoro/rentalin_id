@@ -3,7 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/modules/rent/controllers/rent_controller.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
-
+import 'package:rentalin_id/app/widgets/input_with_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../data/constant/color.dart';
 import '../../../widgets/app_bar.components.dart';
 import '../../../widgets/input_text.components.dart';
@@ -11,11 +12,12 @@ import 'rent_view.dart';
 import 'rent2_view.dart';
 import 'rent4_view.dart';
 
-class Rent3View extends GetView<RentController>{
+class Rent3View extends GetView<RentController> {
   const Rent3View({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => RentController());
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -24,9 +26,11 @@ class Rent3View extends GetView<RentController>{
         toolbarHeight: 100,
         titleSpacing: 0,
         automaticallyImplyLeading: false,
-        title: const AppBarComponents(nameMenu: 'Rent Motorcycle',),
+        title: const AppBarComponents(
+          nameMenu: 'Rent Motorcycle',
+        ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -58,11 +62,17 @@ class Info3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rentController = Get.find<RentController>();
+    final mapController = Get.find<MapController>(); // Accessing MapController
+
+    final arguments = Get.arguments;
+    print(arguments?['address']);
+
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.fromLTRB(13, 21, 14, 21),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(13, 21, 14, 21),
       width: 344,
-      height: 400  ,
+      height: 400,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.rectangle,
@@ -70,24 +80,47 @@ class Info3 extends StatelessWidget {
       ),
       child: Column(
         children: [
-          InputTextNoIcon(
-            labelText: 'Deliver Address', 
-            hintText: 'Enter your Delivery Address'
+          InputWithMap(
+            controller: rentController.deliveryController,
+            labelText: 'Deliver Address',
+            hintText: arguments['address'],
+            onLocationSelected: (LatLng location) {
+              mapController.updateLocation(location);
+              rentController.deliveryController.text =
+                  mapController.selectedAddress.value ??
+                      "Alamat belum ditemukan";
+            },
+            onChanged: (value) => arguments['address'] = value,
           ),
-          SizedBox(height: 10,),
-          InputTextNoIcon(
-            labelText: 'Pickup Address', 
-            hintText: 'Enter your Pickup Address'
+          const SizedBox(
+            height: 10,
           ),
-          SizedBox(height: 10,),
-          InputTextNoIcon(
-            labelText: 'Method Payment', 
-            hintText: 'Select your method payment'
+          InputWithMap(
+            controller: rentController.pickupController,
+            labelText: 'Pickup Address',
+            hintText: 'Enter your Pickup Address',
+            onLocationSelected: (LatLng location) {
+              mapController.updateLocation(location);
+              rentController.pickupController.text =
+                  mapController.selectedAddress.value ??
+                      "Alamat belum ditemukan";
+            },
           ),
-          SizedBox(height: 10,),
-           InputTextNoIcon(
-            labelText: 'Total Payment', 
-            hintText: 'Rp.300.000'
+          const SizedBox(
+            height: 10,
+          ),
+          InputTextNoIcon(
+            controller: rentController.methodPaymentController,
+            labelText: 'Method Payment',
+            hintText: 'Select your method payment',
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          InputTextNoIcon(
+            controller: rentController.totalPaymentController,
+            labelText: 'Total Payment',
+            hintText: 'Rp.300.000',
           ),
         ],
       ),
@@ -128,11 +161,13 @@ class BtnN3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<RentController>();
     return SizedBox(
       width: 163,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
+          await controller.saveToFirebase();
           Get.to(Rent4View());
         },
         style: ElevatedButton.styleFrom(
