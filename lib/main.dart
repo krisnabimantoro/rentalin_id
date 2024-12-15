@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/data/services/notification.handler.dart';
+import 'package:rentalin_id/denpedency_injection.dart';
 import 'package:rentalin_id/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +20,7 @@ void main() async {
   await Get.putAsync(() async => await SharedPreferences.getInstance());
   await FirebaseMessagingHandler().initPushNotification();
   // await FirebaseMessagingHandler().initLocalNotification();
-
+  await GetStorage.init();
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -28,4 +30,5 @@ void main() async {
       getPages: AppPages.routes,
     ),
   );
+  DenpendencyInjection.init();
 }

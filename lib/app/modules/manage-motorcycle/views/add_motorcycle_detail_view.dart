@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/manage_motorcycle_controller.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 import 'package:rentalin_id/app/widgets/videoPlayerWidget.dart';
@@ -22,11 +23,12 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
   Future<void> playNotificationSound() async {
     await audioPlayer.play(AssetSource('audio/notification.mp3'));
   }
+  final ManageMotorcycleController _controllerManage = Get.put(ManageMotorcycleController());
 
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
-      Get.lazyPut(()=>CameraController());
+    Get.lazyPut(() => CameraController());
     final Motorcycle motorcycle = Get.arguments;
 
     return Scaffold(
@@ -186,15 +188,14 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
-                      CollectionReference addMotor =
-                          firestore.collection("Manage MotorCycle");
-                      await addMotor.add({
+                      await _controllerManage.saveData("Manage MotorCycle", {
+                        'Motorcycle ID': motorcycle.motorcycleId,
                         'Merk Motor': motorcycle.merkMotor,
                         'Motor Name': motorcycle.motorName,
+                        'Type Motor': motorcycle.typeMotor,
                         'Plat Motor': motorcycle.platMotor,
                         'Price/Day': motorcycle.pricePerDay,
                         'Recommendation': motorcycle.isRecommended,
-                        'Type Motor': motorcycle.typeMotor
                       });
                       await playNotificationSound();
                       // Define what happens when "Add New" is pressed
