@@ -17,7 +17,7 @@
     <application
         android:label="rentalin_id"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/logo_rentalin">
         <activity
             android:name=".MainActivity"
             android:exported="true"
