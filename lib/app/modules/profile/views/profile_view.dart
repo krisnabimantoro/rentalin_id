@@ -103,7 +103,8 @@ class ProfileView extends GetView<ProfileController> {
                       InkWell(
                         onTap: () async {
                           bool result = await signOutFromGoogle();
-                          if (result) {
+                          bool resultEmail = await logout();
+                          if (result || resultEmail) {
                             Get.offAndToNamed(Routes.LOGIN);
                           } else {
                             print('Logout failed');

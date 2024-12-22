@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 Future<dynamic> signInWithGoogle() async {
@@ -25,10 +26,16 @@ Future<dynamic> signInWithGoogle() async {
 }
 
 Future<bool> signOutFromGoogle() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      return true;
-    } on Exception catch (_) {
-      return false;
-    }
+  try {
+    await FirebaseAuth.instance.signOut();
+    return true;
+  } on Exception catch (_) {
+    return false;
   }
+}
+
+Future<bool> logout() async {
+  await FirebaseAuth.instance.signOut();
+  
+  return true;
+}
