@@ -66,6 +66,7 @@ class Info3 extends StatelessWidget {
     final mapController = Get.find<MapController>(); // Accessing MapController
 
     final arguments = Get.arguments;
+    
     print(arguments?['address']);
 
     return Container(
@@ -83,7 +84,7 @@ class Info3 extends StatelessWidget {
           InputWithMap(
             controller: rentController.deliveryController,
             labelText: 'Deliver Address',
-            hintText: arguments['address'],
+            hintText: arguments?['address'] ?? 'Enter delivery address',
             onLocationSelected: (LatLng location) {
               mapController.updateLocation(location);
               rentController.deliveryController.text =
