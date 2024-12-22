@@ -11,23 +11,16 @@ import 'package:rentalin_id/app/widgets/input_text.components.dart';
 
 import '../controllers/login_controller.dart';
 
-
-
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
         backgroundColor: tdBg,
-        // leading: IconButton(
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //     icon: Padding(
-        //       padding: const EdgeInsets.only(left: 6),
-        //       child: Image.asset("assets/icon/arrow-left.png"),
         //     )),
       ),
       body: SingleChildScrollView(
@@ -50,18 +43,21 @@ class LoginView extends GetView<LoginController> {
                 "Sign In First",
                 style: TextStyle(color: tdGrey, fontSize: 16),
               ),
-              const Padding(
-                  padding: EdgeInsets.only(top: 140),
+              Padding(
+                  padding: const EdgeInsets.only(top: 140),
                   child: InputText(
-                      labelText: "Email Address",
-                      hintText: "Enter your email address",
-                      iconPath: "assets/icon/mail.png")),
-              const Padding(
+                    labelText: "Email Address",
+                    hintText: "Enter your email address",
+                    iconPath: "assets/icon/mail.png",
+                    controllerSignup: emailController,
+                  )),
+              Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: InputText(
                       labelText: "Password",
                       hintText: "Enter your password",
-                      iconPath: "assets/icon/lock.png")),
+                      iconPath: "assets/icon/lock.png",
+                      controllerSignup: passwordController)),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -87,18 +83,24 @@ class LoginView extends GetView<LoginController> {
               ]),
               Padding(
                   padding: const EdgeInsets.only(top: 40),
-                  child: ButtonMainComponents(
-                      buttonName: "Login",
-                      nextPage: () {
-                        Get.offAndToNamed(Routes.HOME);
-                      }))
+                  child: Obx(() {
+                    return controller.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : ButtonMainComponents(
+                            buttonName: "Login",
+                            nextPage: () {
+                              final email = emailController.text.trim();
+                              final password = passwordController.text.trim();
+                              controller.login(email, password);
+                            },
+                          );
+                  }))
             ]),
             Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: ButtonGoogle(
                   iconPath: "assets/icon/google.png",
                   labelText: "Sign in with Google",
-                  
                 )),
             Padding(
               padding: const EdgeInsets.only(top: 15),

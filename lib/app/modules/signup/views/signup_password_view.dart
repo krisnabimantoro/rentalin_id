@@ -133,7 +133,8 @@ class ButtonNext extends GetView<SignupController> {
               'phone_number': users.phoneNumber,
               'password': users.password
             });
-            await controller.registerUser();
+            await controller.registerUser(
+                email: users.emailAddress, password: users.password);
 
             Get.to(const LoginView());
           },

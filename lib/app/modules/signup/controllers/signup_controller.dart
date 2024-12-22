@@ -30,10 +30,10 @@ class SignupController extends GetxController {
   final passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> registerUser() async {
+  Future<void> registerUser({required String email, required String password}) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
+        email: email,
         password: passwordController.text.trim(),
       );
       Get.snackbar('Success', 'User registered successfully',

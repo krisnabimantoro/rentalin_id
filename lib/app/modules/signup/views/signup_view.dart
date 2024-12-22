@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/modules/login/views/login_view.dart';
 // import 'package:rentalin_id/app/modules/home/views/home_view.dart';
 import 'package:rentalin_id/app/modules/signup/views/signup_user_view.dart';
 import 'package:rentalin_id/app/widgets/google_button.components.dart';
@@ -20,7 +21,7 @@ class SignupView extends GetView<SignupController> {
           backgroundColor: tdBg,
           leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
               icon: Padding(
                 padding: const EdgeInsets.only(left: 6),
@@ -68,7 +69,7 @@ class SignupView extends GetView<SignupController> {
                         iconPath: "assets/icon/google.png",
                         labelText: "Sign in with Google",
                       )),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -80,9 +81,14 @@ class SignupView extends GetView<SignupController> {
                             style: TextStyle(color: tdGrey),
                           ),
                         ),
-                        Text(
-                          "Sign In",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        InkWell(
+                          onTap: () {
+                            Get.to(LoginView());
+                          },
+                          child: const Text(
+                            "Sign In",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),

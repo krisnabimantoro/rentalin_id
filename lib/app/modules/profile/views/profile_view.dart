@@ -4,6 +4,7 @@ import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/profile/views/editprofile_view.dart';
+import 'package:rentalin_id/app/modules/webview-page/views/webview_page_view.dart';
 import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
 
 import '../../../data/services/auth.controller.dart';
@@ -196,17 +197,24 @@ class ViewProfile extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         image: AssetImage("assets/img/krisna.png")))),
-            const Column(
+            Column(
               children: [
-                Text(
+                const Text(
                   "Krisna Bimantoro",
                   style: TextStyle(
                       color: tdBlue, fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "WUZZ Rent",
-                  style: TextStyle(
-                      color: tdGrey, fontSize: 20, fontWeight: FontWeight.bold),
+                InkWell(
+                  onTap: () {
+                    Get.to(const WebviewPageView());
+                  },
+                  child: const Text(
+                    "WUZZ Rent",
+                    style: TextStyle(
+                        color: tdGrey,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),

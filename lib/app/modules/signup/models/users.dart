@@ -1,18 +1,18 @@
 class Users {
   String? usersId;
-  String? emailAddress;
+  String emailAddress;
   String? fileName;
   String? fullName;
   String? nameRent;
-  String? password;
+  String password;
   String? phoneNumber;
 
   Users(
       {this.usersId,
-      this.emailAddress,
+      required this.emailAddress,
       this.fileName,
       this.fullName,
       this.nameRent,
-      this.password,
+      required this.password,
       this.phoneNumber});
 }

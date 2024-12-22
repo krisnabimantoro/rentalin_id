@@ -24,14 +24,13 @@ class SignupUserView extends GetView<SignupController> {
 
   @override
   Widget build(BuildContext context) {
-    
     Get.lazyPut(() => SignupController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: tdBg,
         leading: IconButton(
           onPressed: () {
-            Get.to(SignupView());
+            Get.back();
           },
           icon: Padding(
             padding: const EdgeInsets.only(left: 6),
@@ -114,7 +113,8 @@ class SignupUserView extends GetView<SignupController> {
                 labelText: "Email Address",
                 hintText: "Enter your email address",
                 iconPath: "assets/icon/mail.png",
-                onChanged: (value) => controller.users.value.emailAddress = value,
+                onChanged: (value) =>
+                    controller.users.value.emailAddress = value,
                 controllerSignup: controller.emailController,
               ),
             ),
