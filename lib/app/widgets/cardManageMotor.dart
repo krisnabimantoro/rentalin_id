@@ -26,6 +26,7 @@ class CardManageMotorFirebase extends GetView<AddMotorcycleController> {
   final String? merkMotor;
   final String? motorName;
   final String? platMotor;
+  final String? fileImage;
   final double? pricePerDay;
   final bool? recommendation;
   final String? typeMotor;
@@ -36,6 +37,7 @@ class CardManageMotorFirebase extends GetView<AddMotorcycleController> {
     this.motorName,
     this.platMotor,
     this.pricePerDay,
+    this.fileImage,
     this.recommendation,
     this.typeMotor,
     this.motorcycleId,
@@ -61,7 +63,6 @@ class CardManageMotorFirebase extends GetView<AddMotorcycleController> {
 
     // var data = snapshot.data!;
 
-   
     // print(controller.motorcycle.value.motorcycleId);
     return InkWell(
       onTap: () {
@@ -69,18 +70,20 @@ class CardManageMotorFirebase extends GetView<AddMotorcycleController> {
           print("Error: motorcycleId is null");
           return;
         }
-        Get.to(DetailManageMotorcycleView(),
-            // arguments: controller.motorcycle.value
-            arguments: {
-              'motorcycleId': motorcycleId,
-              'merkMotor': merkMotor,
-              'motorName': motorName,
-              'platMotor': platMotor,
-              'pricePerDay': pricePerDay,
-              'recommendation': recommendation,
-              'typeMotor': typeMotor,
-            },
-            );
+        Get.to(
+          DetailManageMotorcycleView(),
+          // arguments: controller.motorcycle.value
+          arguments: {
+            'motorcycleId': motorcycleId,
+            'merkMotor': merkMotor,
+            'fileImage': fileImage,
+            'motorName': motorName,
+            'platMotor': platMotor,
+            'pricePerDay': pricePerDay,
+            'recommendation': recommendation,
+            'typeMotor': typeMotor,
+          },
+        );
       },
       child: Container(
         width: 344,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
+import 'package:rentalin_id/app/data/models/motor.dart';
 import 'package:rentalin_id/app/modules/notification/views/notification_view.dart';
 import 'package:rentalin_id/app/widgets/bottom_bar.components.dart';
 import 'package:rentalin_id/app/widgets/cardList.component.dart';
@@ -9,10 +10,14 @@ import 'package:rentalin_id/app/widgets/cardList.component.dart';
 import '../controllers/home_controller.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 
+import 'package:rentalin_id/app/data/models/motor.dart';
+
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => HomeController());
+
     return Scaffold(
       appBar: AppBar(
           scrolledUnderElevation: 0,
@@ -69,17 +74,27 @@ class HomeView extends GetView<HomeController> {
           )),
       body: BottomBar(
           body: (BuildContext context, ScrollController controller) {
+            final HomeController controller = Get.put(HomeController());
             return SingleChildScrollView(
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    statusCard('Available', '20'),
-                    statusCard('Booked', '8'),
-                    statusCard('On Rent', '4'),
-                  ],
-                ),
+                Obx(() {
+                  if (controller.motors.isEmpty) {
+                    return Center(child: Text("No data available"));
+                  }
+
+                  // Access the first motor directly inside the widget
+                  Motor motor = controller.motors.first;
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      statusCard('Available', motor.avaiable),
+                      statusCard('Booked', motor.booked),
+                      statusCard('On Rent', motor.onrent),
+                    ],
+                  );
+                }),
                 const SizedBox(
                   height: 10,
                 ),
@@ -99,7 +114,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ],
                   ),
-                  child: const Column(
+                  child: Column(
                     // mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -124,7 +139,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(left: 24,top: 12),
+                  padding: EdgeInsets.only(left: 24, top: 12),
                   child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -135,7 +150,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 const CardRecommendation(),
                 const Padding(
-                  padding: EdgeInsets.only(left: 24,top: 12),
+                  padding: EdgeInsets.only(left: 24, top: 12),
                   child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -146,7 +161,9 @@ class HomeView extends GetView<HomeController> {
                 ),
                 const CardListMotor(),
                 const CardListMotor(),
-                SizedBox(height: 120,)
+                SizedBox(
+                  height: 120,
+                )
               ]),
             );
           },

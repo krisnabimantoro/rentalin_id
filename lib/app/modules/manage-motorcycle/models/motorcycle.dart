@@ -3,6 +3,7 @@ class Motorcycle {
   String? merkMotor;
   String? motorName;
   String? typeMotor;
+  String? fileImage;
   String? platMotor;
   double? pricePerDay; // New field for price per day
   bool? isRecommended;
@@ -11,6 +12,7 @@ class Motorcycle {
     this.motorcycleId,
     this.merkMotor,
     this.motorName,
+    this.fileImage,
     this.typeMotor,
     this.platMotor,
     this.pricePerDay,

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/data/models/motor.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/add_motorcyle_controller.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/models/motorcycle.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/views/update_motorcycle_view.dart';
@@ -45,6 +46,7 @@ class DetailManageMotorcycleView extends GetView<AddMotorcycleController> {
     // var data = _controller.motorcycle;
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     Get.lazyPut(() => AddMotorcycleController());
+    
     // final Motorcycle motorcycle = Get.arguments as Motorcycle;
 
     final arguments = Get.arguments;
@@ -92,7 +94,8 @@ class DetailManageMotorcycleView extends GetView<AddMotorcycleController> {
                   height: 148,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(""), fit: BoxFit.cover),
+                          image: AssetImage("assets/img/img1.jpg"),
+                          fit: BoxFit.cover),
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                 ),
                 Container(

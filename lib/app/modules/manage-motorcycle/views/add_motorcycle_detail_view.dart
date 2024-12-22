@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:rentalin_id/app/data/constant/color.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/camera_motorcycle_controller.dart';
 import 'package:rentalin_id/app/modules/manage-motorcycle/controllers/manage_motorcycle_controller.dart';
+import 'package:rentalin_id/app/modules/manage-motorcycle/views/manage_motorcycle_view.dart';
 import 'package:rentalin_id/app/widgets/app_bar.components.dart';
 import 'package:rentalin_id/app/widgets/input_text_noicon.components.dart';
 import 'package:rentalin_id/app/widgets/videoPlayerWidget.dart';
@@ -23,8 +24,11 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
   Future<void> playNotificationSound() async {
     await audioPlayer.play(AssetSource('audio/notification.mp3'));
   }
-  final ManageMotorcycleController _controllerManage = Get.put(ManageMotorcycleController());
 
+  final ManageMotorcycleController _controllerManage =
+      Get.put(ManageMotorcycleController());
+
+  final CameraController controllerImage = Get.put(CameraController());
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AddMotorcycleController());
@@ -188,6 +192,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
+                      // await controllerImage.uploadImage();
                       await _controllerManage.saveData("Manage MotorCycle", {
                         'Motorcycle ID': motorcycle.motorcycleId,
                         'Merk Motor': motorcycle.merkMotor,
@@ -199,6 +204,7 @@ class AddMotorcycleDetailView extends GetView<AddMotorcycleController> {
                       });
                       await playNotificationSound();
                       // Define what happens when "Add New" is pressed
+                      Get.to(ManageMotorcycleView());
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
